@@ -63,10 +63,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Unicell.Business\Unicell.Business.csproj">
-      <Project>{cd7d5843-78a3-4c5f-a9dd-104f29f4152b}</Project>
-      <Name>Unicell.Business</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Unicell.DTO\Unicell.DTO.csproj">
       <Project>{9592059d-9e7a-454a-9588-c5c0bdc22cc6}</Project>
       <Name>Unicell.DTO</Name>

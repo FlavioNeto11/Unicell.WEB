@@ -6,7 +6,7 @@ using Dapper;
 
 namespace Unicell.DAL
 {
-    public class DALConnectionWEB
+    public static class DALConnectionWEB
     {
         public static List<MobileDTO> getMobile(string UserID)
         {
@@ -23,6 +23,19 @@ namespace Unicell.DAL
                     Icon = item.ICON
                 }).ToList();
 
+        }
+
+        public static UsuarioDTO SignIn(string email, string password)
+        {
+            try
+            {
+                return Utils.DapperConnection.Query<UsuarioDTO>("SIGN_IN", new { EMAIL = email, PASSWORD = password }).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public static bool SendMobile(string androidID, string geoLocation, string androidStatus, string nomeFuncionario, string UserID, bool Icon)

@@ -20,6 +20,13 @@ namespace Unicell.API.Controllers
             return DALConnectionWEB.getMobile(UserID);
         }
 
+        [HttpPost]
+        [Route("SignIn")]
+        public UsuarioDTO SignIn([FromBody]string Email, [FromBody]string Password)
+        {
+            return DALConnectionWEB.SignIn(Email, Password);
+        }
+
         public bool SendMobile([FromBody]string androidID, [FromBody] string geoLocation, [FromBody] string androidStatus, [FromBody] string nomeFuncionario, [FromBody] string UserID, [FromBody] bool Icon)
         {
             return DALConnectionWEB.SendMobile(androidID, geoLocation, androidStatus, nomeFuncionario, UserID, Icon);
