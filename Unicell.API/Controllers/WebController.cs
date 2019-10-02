@@ -7,6 +7,7 @@ using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 using Twilio.Types;
 using Unicell.API.Login;
+using Unicell.API.Models;
 using Unicell.DAL;
 using Unicell.DTO;
 
@@ -78,14 +79,16 @@ namespace Unicell.API.Controllers
         /// </summary>
         /// <param name="name">Nome do aplicativo</param>
         /// <returns>Lista de aplicativos contendo Nome, PackageName e imagens de preview.</returns>
-        public List<AppMetadataDTO> getAppList([FromBody]string name, [FromBody]string androidId)
+        [HttpPost]
+        [Route("getAppList")]
+        public List<AppMetadataDTO> getAppList([FromBody]getAppModel model)
         {
-            List<AppMetadataDTO> retorno = Utils.getAppListByRegex(name,
-                "<img.+?src=[\"'](.+?)[\"'].+?>|<span class=\"preview-overlay-container\" data-docid=[\"'](.+?)[\"'].+?>",
+            List<AppMetadataDTO> retorno = Utils.getAppListByRegex(model.name,
+                "<div class=\"[^\\\"]*\" title=\"[^\\\"]*\"|<a href=\"/store/apps/details?.[^\\\"]*\" aria-hidden=\"[^\\\"]*\" tabindex=\"[^\\\"]*\" class=\"[^\\\"]*\"></a>|<img.+?\"https://lh3.googleusercontent.com.+?>",
                 "https://play.google.com/store/search?c=apps&q=");
 
-            List<AppMetadataDTO> retornoDB = getApps(retorno.Select(x => x.PackageName).ToList(), androidId);
-            return retornoDB.Union(retorno, new AppMetadataComparer()).ToList();
+            //List<AppMetadataDTO> retornoDB = getApps(retorno.Select(x => x.PackageName).ToList(), model.androidId);
+            return retorno;
         }
 
         [HttpGet]

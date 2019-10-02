@@ -30,3 +30,4 @@ namespace Unicell.WEB.Utils
             filterContext.Result = new RedirectResult("/Login/Logout");
         }
     }
+}

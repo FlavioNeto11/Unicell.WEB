@@ -23,24 +23,19 @@ namespace Unicell.DAL
         /// <returns>Lista de aplicativos contendo Nome, PackageName e imagens de preview.</returns>
         public static List<AppMetadataDTO> getAppListByRegex(string name, string pattern, string url, bool primeiro = false, string packageName = "")
         {
-            MatchCollection b = new Regex(pattern).Matches(getResponseFromServerAsync(url + name));
+            var html = getResponseFromServerAsync(url + name);
+            MatchCollection b = new Regex(pattern).Matches(html);
             int pipe = pattern.Count(x => x.Equals('|'));
 
-            var retorno = (b.Count > 0) ? b.Cast<Match>().Take(Math.Max(0, b.Count - pipe))
-                            .Select((m, i) => new {
-                                index = i,
-                                value = m.Value + Enumerable.Range(i, pipe)
-                                                .Select(x => b[x + 1].Value)
-                                                .Aggregate((a, c) => a + c)
-                            })
-                            .Where(m => m.index % (pipe + 1) == 0)
-                            .Select(m => new AppMetadataDTO()
-                            {
-                                Descricao = GetVal(m.value, "alt"),
-                                dataCoverLarge = GetVal(m.value, "data-cover-large"),
-                                dataCoverSmall = GetVal(m.value, "data-cover-small"),
-                                PackageName = (packageName != "") ? packageName : GetVal(m.value, "data-docid")
-                            }).ToList() : new List<AppMetadataDTO>();
+            var retorno = (b.Count > 5) ? b.Cast<Match>()
+                .Select((x, i) => new { index = i / 6, value = x })
+                .GroupBy(x => x.index)
+                .Select(x => new AppMetadataDTO() {
+                    Descricao = GetVal(x.ToList()[5].value.Value, "title"),
+                    PackageName = GetVal(x.ToList()[4].value.Value, "href").Split('=').Last(),
+                    dataCoverLarge = GetVal(x.ToList()[2].value.Value, "data-srcset").Split(' ').First(),
+                    dataCoverSmall = GetVal(x.ToList()[2].value.Value, "data-src") })
+                .ToList() : new List<AppMetadataDTO>();
 
             return (primeiro) ? new List<AppMetadataDTO>() { retorno.First() } : retorno;
         }
