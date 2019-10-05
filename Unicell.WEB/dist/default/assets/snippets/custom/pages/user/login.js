@@ -35,11 +35,16 @@ var SnippetLogin = function () {
                         }
                     }
                 }), l.valid() && (a.addClass("m-loader m-loader--right m-loader--light").attr("disabled", !0), l.ajaxSubmit({
-                    url: "",
+                    url: "/Login/LoginIn",
+                    type: 'post',
+                    //data: JSON.stringify({ password: $('#login_password').val(), email: $('#login_email').val() }),
                     success: function (e, t, r, s) {
-                        setTimeout(function () {
-                            a.removeClass("m-loader m-loader--right m-loader--light").attr("disabled", !1), i(l, "danger", "Incorrect username or password. Please try again.")
-                        }, 2e3)
+                        if (e !== null) {
+                            window.location.href = "/Home";
+                        }
+                        else {
+                            a.removeClass("m-loader m-loader--right m-loader--light").attr("disabled", !1), i(l, "danger", "Incorrect username or password. Please try again.");
+                        }
                     }
                 }))
             }), $("#m_login_signup_submit").click(function (l) {

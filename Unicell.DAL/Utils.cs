@@ -28,7 +28,7 @@ namespace Unicell.DAL
             int pipe = pattern.Count(x => x.Equals('|'));
 
             var retorno = (b.Count > 5) ? b.Cast<Match>()
-                .Select((x, i) => new { index = i / 6, value = x })
+                .Select((x, i) => new { index = i / 6, value = x }).Where(x => (primeiro) ? x.index == 0 : true)
                 .GroupBy(x => x.index)
                 .Select(x => new AppMetadataDTO() {
                     Descricao = GetVal(x.ToList()[5].value.Value, "title"),
@@ -37,7 +37,7 @@ namespace Unicell.DAL
                     dataCoverSmall = GetVal(x.ToList()[2].value.Value, "data-src") })
                 .ToList() : new List<AppMetadataDTO>();
 
-            return (primeiro) ? new List<AppMetadataDTO>() { retorno.First() } : retorno;
+            return retorno;
         }
 
         /// <summary>

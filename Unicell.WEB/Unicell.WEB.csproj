@@ -1683,6 +1683,7 @@
     <Content Include="tools\yarn-error.log" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Faq\Index.cshtml" />
+    <Content Include="Views\Home\GoogleMaps.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

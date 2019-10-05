@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unicell.DTO;
 using Dapper;
+using System.Data;
 
 namespace Unicell.DAL
 {
@@ -29,12 +30,16 @@ namespace Unicell.DAL
         {
             try
             {
-                return Utils.DapperConnection.Query<UsuarioDTO>("SIGN_IN", new { EMAIL = email, PASSWORD = password }).FirstOrDefault();
+                return Utils.DapperConnection.Query<UsuarioDTO>("SIGN_IN", new
+                {
+                    EMAIL = email,
+                    PASSWORD = password
+                }, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
 

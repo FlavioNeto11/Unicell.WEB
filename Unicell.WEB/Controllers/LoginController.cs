@@ -21,18 +21,21 @@ namespace Unicell.WEB.Controllers
 
         [HttpPost]
         [Route("LoginIn")]
-        public JsonResult LoginIn(string email, string senha)
+        public JsonResult LoginIn(string email, string password)
         {
-            var retorno = Business.WebBLL.SignIn(email, senha);
+            var retorno = Business.WebBLL.SignIn(email, password);
 
-            UsuarioLogado.Usuario.UserID = retorno.UserID;
-            UsuarioLogado.Usuario.UserName = retorno.UserName;
+            if (retorno != null)
+            {
+                UsuarioLogado.Usuario = new DTO.UsuarioDTO() {
+                    UserID = retorno.UserID,
+                    UserName = retorno.UserName
+                };
+            }
 
             return Json(JsonConvert.SerializeObject(retorno));
         }
 
-        [HttpPost]
-        [Route("Logout")]
         public ActionResult Logout()
         {
             LimparSessao();
