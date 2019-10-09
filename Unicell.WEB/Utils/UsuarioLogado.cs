@@ -28,7 +28,7 @@ namespace Mirante.Util
                 }
                 catch (Exception ex)
                 {
-                    return new UsuarioDTO() { UserID = 0 };
+                    return new UsuarioDTO() { UserID = string.Empty };
                 }
             }
             set
