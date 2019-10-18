@@ -12,7 +12,7 @@ namespace Unicell.WEB.Utils
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             //Caso não encontre um usuário logado
-            if (UsuarioLogado.Usuario == null || UsuarioLogado.Usuario.UserID == null || UsuarioLogado.Usuario.UserID == string.Empty)
+            if (UsuarioLogado.Usuario == null || UsuarioLogado.Usuario.UserID == null || UsuarioLogado.Usuario.UserID == 0)
                 return false;
 
             //Limpa todos os Caches que houverem

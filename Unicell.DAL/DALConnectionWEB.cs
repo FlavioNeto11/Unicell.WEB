@@ -9,20 +9,29 @@ namespace Unicell.DAL
 {
     public static class DALConnectionWEB
     {
-        public static List<MobileDTO> getMobile(string UserID)
+        public static MobileDTO getMobile(int UserID, int? QtdPorPagina, int? Pagina, string search)
         {
-            return Utils.DapperConnection.Query(" SELECT M.ANDROID_ID, M.GEO_LOCALIZACAO, M.ULTIMO_ACESSO, M.ANDROID_STATUS, F.NM_FUNCIONARIO, M.ICON FROM MOBILE M "
-                                                         + " LEFT JOIN FUNCIONARIO F ON M.ID_FUNCIONARIO = F.ID "
-                                                         + " LEFT JOIN USERPROFILE U ON U.ID_EMPRESA = F.ID_EMPRESA "
-                                                         + " WHERE U.USERNAME = @USERID OR F.ID IS NULL ", new { USERID = UserID }).Select(
-                item => new MobileDTO() {
-                    AndroidID = item.ANDROID_ID,
-                    GeoLocalizacao = item.GEO_LOCALIZACAO,
-                    UltimoAcesso = item.ULTIMO_ACESSO.ToString(),
-                    AndroidStatus = item.ANDROID_STATUS,
-                    NomeFuncionario = item.NM_FUNCIONARIO,
-                    Icon = item.ICON
-                }).ToList();
+            try
+            {
+                var query = Utils.DapperConnection.QueryMultiple("GET_MOBILE", new
+                {
+                    @USER_ID = UserID,
+                    QtdPorPagina = QtdPorPagina,
+                    Pagina = Pagina,
+                    search = search,
+                }, commandType: CommandType.StoredProcedure);
+
+
+                return new MobileDTO()
+                {
+                    data = query.Read<MobileDTO.Result>().ToList(),
+                    sucesso = query.ReadSingle<SucessoDTO>()
+                };
+            }
+            catch (Exception exc)
+            {
+                throw new Exception(exc.Message);
+            }
 
         }
 

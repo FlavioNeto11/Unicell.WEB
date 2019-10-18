@@ -20,16 +20,32 @@ namespace Unicell.WEB.Controllers
 
         public ActionResult GoogleMaps()
         {
+            ViewBag.UserName = UsuarioLogado.Usuario.UserName;
+            return View();
+        }
+
+        public ActionResult ConfigurarDispositivos()
+        {
             return View();
         }
 
         [HttpPost]
+        [HandleErrorWithAjaxFilter]
         [Route("GetMobile")]
-        public JsonResult GetMobile()
+        public JsonResult GetMobile(int? draw, int? start, int? length, string search)
         {
-            var retorno = Business.WebBLL.getMobile(UsuarioLogado.Usuario.UserID);
-
-            return Json(retorno, JsonRequestBehavior.AllowGet);
+            if (draw != null)
+            {
+                int? page = (start.HasValue ? start.Value / length : 0) + 1;
+                var retorno = Business.WebBLL.getMobile(UsuarioLogado.Usuario.UserID, length ?? 5, page.Value, search);
+                retorno.draw = draw;
+                return Json(retorno, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var retorno = Business.WebBLL.getMobile(UsuarioLogado.Usuario.UserID);
+                return Json(retorno, JsonRequestBehavior.AllowGet);
+            }
         }
 
         public ActionResult Chat()

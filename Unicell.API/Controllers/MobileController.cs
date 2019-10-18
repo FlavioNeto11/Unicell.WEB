@@ -4,21 +4,27 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Unicell.API.Models;
 using Unicell.DAL;
 using Unicell.DTO;
 
 namespace Unicell.API.Controllers
 {
+    [RoutePrefix("Mobile")]
     public class MobileController : ApiController
     {
-        public string[] SendAcessos([FromBody]string androidID, [FromBody]string packages)
+        [HttpPost]
+        [Route("SendAcessos")]
+        public string[] SendAcessos([FromBody] SendAcessosModel model)
         {
-            return new DALConnectionMobile().SendAcessos(androidID, packages);
+            return DALConnectionMobile.SendAcessos(model.androidID, model.packages);
         }
 
-        public MobileResultDTO SendMobile([FromBody]string androidID, [FromBody]string geoLocation, [FromBody]string androidStatus)
+        [HttpPost]
+        [Route("SendMobile")]
+        public MobileResultDTO SendMobile([FromBody] SendMobileModel model)
         {
-            return new DALConnectionMobile().SendMobile(androidID, geoLocation, androidStatus);
+            return DALConnectionMobile.SendMobile(model.androidID, model.geoLocation, model.androidStatus, model.telefones, model.isCharging, model.signalStrength, model.chargeLevel);
         }
     }
 }

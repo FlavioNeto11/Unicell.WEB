@@ -10,7 +10,7 @@ namespace Unicell.WEB
 {
     public class ChatHub : Hub
     {
-        public static List<Users> users = new List<Users>();
+        private static List<Users> users = new List<Users>();
         public void Hello()
         {
             Clients.All.hello();
@@ -24,6 +24,11 @@ namespace Unicell.WEB
             {
                 Clients.Client(send_connectionID).SendMessage(message, user.username);
             }
+        }
+
+        public List<Users> GetUsers()
+        {
+            return users;
         }
 
         public override Task OnConnected()

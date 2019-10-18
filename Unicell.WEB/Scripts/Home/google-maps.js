@@ -1,6 +1,6 @@
 //== Class definition
 
-var selectedAndroidID;
+var selectedANDROID_ID;
 var usuarios;
 var markers = [];
 var firstTime = true;
@@ -31,11 +31,11 @@ var _GoogleMaps = function () {
                 $.each(result.data, function () {
                     var el = this;
 
-                    var lat = parseFloat(el.GeoLocalizacao.split(':')[0]);
-                    var lng = parseFloat(el.GeoLocalizacao.split(':')[1]);
+                    var lat = parseFloat(el.GEO_LOCALIZACAO.split(':')[0]);
+                    var lng = parseFloat(el.GEO_LOCALIZACAO.split(':')[1]);
 
-                    if (el.GeoLocalizacao.split(':').length > 1) {
-                        var marker = markers.find(item => item.details.androidID === el.AndroidID);
+                    if (el.GEO_LOCALIZACAO.split(':').length > 1) {
+                        var marker = markers.find(item => item.details.androidID === el.ANDROID_ID);
 
                         if (marker) {
                             var latlng = new google.maps.LatLng(lat, lng);
@@ -46,16 +46,16 @@ var _GoogleMaps = function () {
                                 map.addMarker({
                                     lat: lat,
                                     lng: lng,
-                                    title: el.NomeFuncionario,
+                                    title: el.NM_FUNCIONARIO,
                                     infoWindow: {
-                                        content: '<span style="color:#000">' + el.NomeFuncionario + '</span>'
+                                        content: '<span style="color:#000">' + el.NM_FUNCIONARIO + '</span>'
                                     },
                                     details: {
-                                        androidID: el.AndroidID
+                                        androidID: el.ANDROID_ID
                                     },
                                     click: function (e) {
                                         if (console.log) console.log(e);
-                                        selectedAndroidID = e.details.androidID;
+                                        selectedANDROID_ID = e.details.androidID;
                                     }
                                 }));
                         }
@@ -63,7 +63,7 @@ var _GoogleMaps = function () {
                 });
 
                 if (firstTime)
-                    map.setCenter(result[0].GeoLocalizacao.split(':')[0], result[0].GeoLocalizacao.split(':')[1]);
+                    map.setCenter(result.data[0].GEO_LOCALIZACAO.split(':')[0], result.data[0].GEO_LOCALIZACAO.split(':')[1]);
 
                 if (firstTime)
                     map.setZoom(8);
@@ -126,14 +126,12 @@ jQuery(document).ready(function () {
     // Create a function that the hub can call back to display messages.
     chat.client.sendMessage = function (message, name) {
         // Add the message to the page.
-        if (name !== displayname)
+        if (name != displayname)
             $('#mensagens').append(templateMensagemTerceiro.replace('{remetente}', name).replace('{mensagem}', message));
         else
             $('#mensagens').append(templateMensagem.replace('{mensagem}', message));
     };
 
-    // Get the user name and store it to prepend to messages.
-    var displayname = prompt('Enter your name:', '');
     // Set initial focus to message input box.
     $('#messageText').focus();
 
@@ -152,10 +150,10 @@ jQuery(document).ready(function () {
         refreshUsuarios();
 
         $('#messageText').keydown(function (e) {
-            if (e.keyCode === 13) {
+            if (e.keyCode == 13) {
 
                 $.map(usuarios, function (item) {
-                    if (item.username === selectedAndroidID) {
+                    if (item.username == selectedANDROID_ID) {
                         chat.server.sendMessage($('#messageText').val(), item.connectionID);
                         // Clear text box and reset focus for next comment.
                         $('#messageText').val('').focus();

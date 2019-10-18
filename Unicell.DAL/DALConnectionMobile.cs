@@ -1,37 +1,45 @@
 ﻿using Dapper;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using Unicell.API.Models;
 using Unicell.DTO;
 
 namespace Unicell.DAL
 {
     public class DALConnectionMobile
     {
-        public string[] SendAcessos(string androidID, string packages)
+        public static string[] SendAcessos(string androidID, List<SendAcessosModel.Acesso> packages)
         {
-            return JsonConvert.DeserializeObject<string[]>(packages).Select(package => {
-                Utils.DapperConnection.Query("MANTER_ACESSO", new {
+            return packages.Select(package => {
+                Utils.DapperConnection.Query("MANTER_ACESSO", new
+                {
                     ANDROID_ID = androidID,
-                    PACKAGE_NAME = package.Split('|').First(),
-                    ACESSO = package.Split('|').Last()
-                });
-                return package.Split('|').First();
+                    PACKAGE_NAME = package.packageName,
+                    ACESSO = package.acesso
+                }, commandType: CommandType.StoredProcedure);
+
+                return package.packageName;
             }).ToArray();
         }
 
-        public MobileResultDTO SendMobile(string androidID, string geoLocation, string androidStatus)
+        public static MobileResultDTO SendMobile(string ANDROID_ID, string GEO_LOCALIZACAO, string ANDROID_STATUS, string[] TELEFONES, bool ISCHARGING, int SIGNALSTRENGTH, float CHARGELEVEL)
         {
+            var query = Utils.DapperConnection.QueryMultiple("MANTER_MOBILE", new
+            {
+                ANDROID_ID = ANDROID_ID,
+                GEO_LOCALIZACAO = GEO_LOCALIZACAO,
+                ANDROID_STATUS = ANDROID_STATUS,
+                ISCHARGING = ISCHARGING,
+                SIGNALSTRENGTH = SIGNALSTRENGTH,
+                CHARGELEVEL = CHARGELEVEL
+            }, commandType: CommandType.StoredProcedure);
+
             return new MobileResultDTO()
             {
-                AppAutorizado = Utils.DapperConnection.Query(" MANTER_MOBILE ", new
-                {
-                    ANDROID_ID = androidID,
-                    GEO_LOCALIZACAO = geoLocation,
-                    ANDROID_STATUS = androidStatus
-                }).Select(item => (string)item.PACKAGE_NAME).ToList(),
-                Icon = Utils.DapperConnection.Query(" SELECT CAST(ICON AS CHAR(1)) AS SHOW_ICON FROM MOBILE WHERE ANDROID_ID = @ANDROID_ID ", new {
-                    ANDROID_ID = androidID,
-                }).Select(item => (string)item.SHOW_ICON == "1").First()
+                Autorizacoes = query.Read<MobileResultDTO.Autorizacao>().ToList(),
+                Configuracao = query.ReadFirst<MobileResultDTO.Configuracoes>()
             };
         }
     }

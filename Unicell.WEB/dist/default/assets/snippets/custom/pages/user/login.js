@@ -39,8 +39,8 @@ var SnippetLogin = function () {
                     type: 'post',
                     //data: JSON.stringify({ password: $('#login_password').val(), email: $('#login_email').val() }),
                     success: function (e, t, r, s) {
-                        if (e !== null) {
-                            window.location.href = "/Home";
+                        if (e != null) {
+                            window.location.href = "/Home/GoogleMaps";
                         }
                         else {
                             a.removeClass("m-loader m-loader--right m-loader--light").attr("disabled", !1), i(l, "danger", "Incorrect username or password. Please try again.");
