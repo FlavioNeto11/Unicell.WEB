@@ -56,7 +56,7 @@ var _GoogleMaps = function () {
                 .replace('{0}', (el.NM_FUNCIONARIO) ? el.NM_FUNCIONARIO : el.ANDROID_ID)
                 .replace('{1}', el.CHARGELEVEL * 100)
                 .replace('{2}', el.CHARGELEVEL * 100)
-                .replace('{3}', (el.ISCHARGING) ? 'Na bateria' : 'Carregando')
+                .replace('{3}', (el.ISCHARGING) ? 'Carregando' : 'Na bateria')
                 .replace('{4}', el.SIGNALSTRENGTH * 25)
                 .replace('{5}', el.SIGNALSTRENGTH * 25);
         };

@@ -13,6 +13,10 @@ namespace Unicell.Business
         {
             return DAL.DALConnectionWEB.getMobile(UserID, QtdPorPagina, Pagina, search);
         }
+        public static List<AppMetadataDTO> getAppListByRegex(string name, string pattern, string url, bool primeiro = false, string packageName = "")
+        {
+            return DAL.Utils.getAppListByRegex(name, pattern, url, primeiro, packageName);
+        }
 
         public static UsuarioDTO SignIn(string email, string password)
         {
@@ -33,8 +37,12 @@ namespace Unicell.Business
         {
             DAL.DALConnectionWEB.SetIcon(icon, androidId);
         }
+        public static List<AppMetadata> getAppList(string name, string androidId)
+        {
+            return DAL.DALConnectionWEB.getAppList(name, androidId);
+        }
 
-        public static List<AppMetadataDTO> getAcessos(string androidId)
+         public static List<AppMetadataDTO> getAcessos(string androidId)
         {
             return DAL.DALConnectionWEB.getAcessos(androidId);
         }

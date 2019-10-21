@@ -113,6 +113,53 @@ namespace Unicell.WEB.Controllers
             return Json(retorno, JsonRequestBehavior.AllowGet);
         }
 
+
+        [HttpPost]
+        [HandleErrorWithAjaxFilter]
+        [Route("getApps")]
+        public JsonResult getApps(string nomeAplicativo, string androidID)
+        {
+            if (nomeAplicativo != null && nomeAplicativo.Trim() != string.Empty)
+            {
+                List<AppMetadataDTO> retorno = Business.WebBLL.getAppListByRegex(nomeAplicativo,
+                "<div class=\"[^\\\"]*\" title=\"[^\\\"]*\"|<a href=\"/store/apps/details?.[^\\\"]*\" aria-hidden=\"[^\\\"]*\" tabindex=\"[^\\\"]*\" class=\"[^\\\"]*\"></a>|<img.+?\"https://lh3.googleusercontent.com.+?>",
+                "https://play.google.com/store/search?c=apps&q=");
+
+                List<AppMetadataDTO> retornoDB = Business.WebBLL.getApps(retorno.Select(x => x.PackageName).ToList(), androidID);
+               
+                return Json(JsonConvert.SerializeObject(retornoDB.Union(retorno, new AppMetadataComparer()).ToList()));
+            }
+
+            return Json(JsonConvert.SerializeObject(new List<AppMetadata>()));
+        }
+
+        [HttpPost]
+        [HandleErrorWithAjaxFilter]
+        [Route("getAppsList")]
+        public JsonResult getAppsList(string androidID)
+        {
+            return Json(JsonConvert.SerializeObject(Business.WebBLL.getApps(new string[] { }.ToList(), androidID)));
+        }
+
+
+        [HttpPost]
+        [HandleErrorWithAjaxFilter]
+        [Route("getAcessos")]
+        public JsonResult getAcessos(string androidID)
+        {
+            var retorno = Business.WebBLL.getAcessos(androidID);
+            return Json(JsonConvert.SerializeObject(retorno));
+        }
+
+
+        [HttpPost]
+        [HandleErrorWithAjaxFilter]
+        [Route("sendApps")]
+        public JsonResult sendApps(string androidID, Nullable<int> id_app, string packageName, string descricao, string dataCoverSmall, string dataCoverLarge, char incluir)
+        {
+            return Json(JsonConvert.SerializeObject(Business.WebBLL.SendACessoMobile(androidID, (id_app == 0) ? null : id_app, packageName, descricao, dataCoverSmall, dataCoverLarge, incluir)));
+        }
+
         [HttpPost]
         [HandleErrorWithAjaxFilter]
         [Route("GetFuncionario")]

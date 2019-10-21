@@ -1,4 +1,107 @@
 ﻿		<!-- BEGIN: Subheader -->
+    <link href="~/dist/default/assets/vendors/custom/jquery-ui/jquery-ui.bundle.css" rel="stylesheet" />
+<style>
+
+
+    .appContainer {
+        float: left;
+        margin: 10px;
+        padding: 15px;
+        background-color: #FFFFFF;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+        -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        width: 120px;
+        opacity: 1;
+        filter: alpha(opacity=1);
+        -webkit-transition: all 0.0s linear;
+        -moz-transition: all 0.0s linear;
+        -ms-transition: all 0.0s linear;
+        -o-transition: all 0.0s linear;
+        transition: all 0.0s linear;
+        cursor: pointer;
+    }
+
+        .appContainer:hover {
+        }
+
+
+        .appContainer img {
+            width: 90px;
+            margin: 0px;
+        }
+
+    .paragraph-end {
+        background-image: -webkit-gradient(linear,left top,right top,color-stop(0%,rgba(255,255,255,0)),color-stop(100%,rgba(255,255,255,1)));
+        background-image: -webkit-linear-gradient(left,rgba(255,255,255,0),rgba(255,255,255,1));
+        background: linear-gradient(to right,rgba(255,255,255,0),rgba(255,255,255,1));
+        filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1,StartColorStr='#00ffffff',EndColorStr='#ffffff');
+        bottom: 0;
+        height: 25px;
+        max-height: 100%;
+        position: absolute;
+        right: 0;
+        width: 60px;
+    }
+
+    .cardTitle {
+        color: #212121;
+        display: block;
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 18px;
+        max-height: 36px;
+        margin-top: 10px;
+        min-height: 18px;
+        overflow: hidden;
+        text-decoration: none;
+        position: relative;
+        white-space: nowrap;
+    }
+
+    .test_container {
+        height: 550px;
+        background-color: #FFFFFF;
+        padding: 15px;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+        -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .gallery_one, .gallery_two {
+        width: 48%;
+        height: 100%;
+        display: inline-block;
+        border: solid 1px #efeeef;
+        overflow: hidden;
+        background-color: #efeeef;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+        -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .gallery_one {
+        float: left;
+        overflow-y: auto;
+    }
+
+    .gallery_two {
+        float: right;
+        overflow-y: auto;
+    }
+
+    .box_current {
+        background-color: #EEEEEE;
+    }
+
+        .box_current .cardTitle, .box_current .paragraph-end {
+            visibility: hidden;
+        }
+</style>
+
 <div class="m-subheader ">
     <div class="d-flex align-items-center">
         <div class="mr-auto">
@@ -86,15 +189,15 @@
 <!-- END: Subheader -->
 <div class="m-content">
     @*<div class="m-alert m-alert--icon m-alert--air m-alert--square alert alert-dismissible m--margin-bottom-30" role="alert">
-        <div class="m-alert__icon">
-            <i class="flaticon-exclamation m--font-brand"></i>
-        </div>
-        <div class="m-alert__text">
-            With server-side processing enabled, all paging, searching, ordering actions that DataTables performs are handed off to a server where an SQL engine (or similar) can perform these actions on the large data set. See official documentation
-            <a href="https://datatables.net/examples/data_sources/server_side.html"
-               target="_blank">here</a>.
-        </div>
-    </div>*@
+            <div class="m-alert__icon">
+                <i class="flaticon-exclamation m--font-brand"></i>
+            </div>
+            <div class="m-alert__text">
+                With server-side processing enabled, all paging, searching, ordering actions that DataTables performs are handed off to a server where an SQL engine (or similar) can perform these actions on the large data set. See official documentation
+                <a href="https://datatables.net/examples/data_sources/server_side.html"
+                   target="_blank">here</a>.
+            </div>
+        </div>*@
     <div class="m-portlet m-portlet--mobile">
         <div class="m-portlet__head">
             <div class="m-portlet__head-caption">
@@ -180,17 +283,122 @@
         <div class="m-portlet__body">
 
             <!--begin: Datatable -->
-            <table class="table table-striped- table-bordered table-hover table-checkable" id="m_table_1">
-                <thead>
-                    <tr>
-                        <th>IMEI</th>
-                        <th>Funcionário</th>
-                        <th>Endereço</th>
-                        <th>Acesso</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-            </table>
+            <div id="tabela">
+                <table class="table table-striped- table-bordered table-hover table-checkable" id="m_table_1">
+                    <thead>
+                        <tr>
+                            <th>IMEI</th>
+                            <th>Funcionário</th>
+                            <th>Endereço</th>
+                            <th>Acesso</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+            <div id="apps" style="display:none;">
+                <fieldset>
+                    <legend>Nome funcionário</legend>
+                    <ol>
+                        <li>
+                            <label>Nome Funcionario</label>
+                            <input type="text" id="NomeFuncionario" />
+                        </li>
+                    </ol>
+                    <input type="submit" name="Command" value="Salvar" />
+                    <div style="margin-top: 20px;">
+                        <input class="form-control" type="checkbox" id="Icon" />
+                        <label>Exibir icone de instalação</label>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Pesquisar</legend>
+                    <ol>
+                        <li>
+                            <label>Aplicativo</label>
+                            <input class="form-control" type="text" id="Aplicativo" />
+                        </li>
+                    </ol>
+                    <input type="button" id="btnLookupUser" value="Pesquisar" />
+                </fieldset>
+                <fieldset>
+                    <script type="text/template" data-template="listitem">
+                        <div class="appContainer container_one">
+                            <img src="${dataCoverSmall}" alt="${Descricao}" />
+                            <span></span>
+
+                            <span class="cardTitle" title="${Descricao}" aria-hidden="true" tabindex="-1">
+                                ${Descricao} <span class="paragraph-end"></span>
+                            </span>
+                            <input type="hidden" value="${Id}" />
+                            <input type="hidden" value="${Descricao}" />
+                            <input type="hidden" value="${PackageName}" />
+                            <input type="hidden" value="${dataCoverLarge}" />
+                            <input type="hidden" value="${dataCoverSmall}" />
+                        </div>
+                    </script>
+
+                    <script type="text/template" data-template="listitemautorizado">
+                        <div class="appContainer container_two">
+                            <img src="${dataCoverSmall}" alt="${Descricao}" />
+                            <span></span>
+
+                            <span class="cardTitle" title="${Descricao}" aria-hidden="true" tabindex="-1">
+                                ${Descricao} <span class="paragraph-end"></span>
+                            </span>
+                            <input type="hidden" value="${Id}" />
+                            <input type="hidden" value="${Descricao}" />
+                            <input type="hidden" value="${PackageName}" />
+                            <input type="hidden" value="${dataCoverLarge}" />
+                            <input type="hidden" value="${dataCoverSmall}" />
+                        </div>
+                    </script>
+
+                    <div id="test-container" class="test_container">
+                        <div id="gallery-one" class="gallery_one list-items">
+
+                        </div>
+                        <div id="gallery-two" class="droppable gallery_two list-items-autorizado">
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div>
+                        <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Aplicação</th>
+                                    <th>Horario</th>
+
+                                </tr>
+                            </thead>
+                            <tbody id="registrosAcesso">
+                                <tr>
+                                    <td id="tddataCoverSmall"><img style="width: 30px;" src="" /></td>
+                                    <td id="tdDescricao"></td>
+                                    <td id="tdAcesso"></td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+
+                    </div>
+                </fieldset>
+
+                <div class="m-portlet__foot m-portlet__foot--fit">
+                    <div class="m-form__actions m-form__actions">
+                        <div class="row">
+                            <div class="col-lg-9 ml-lg-auto">
+                                <button type="reset" id="btnCancelar" class="btn btn-secondary">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -210,8 +418,346 @@
 
     <script src="~/dist/default/assets/vendors/custom/datatables/datatables.bundle.js"></script>r
 
+    <script src="~/dist/default/assets/vendors/custom/jquery-ui/jquery-ui.bundle.js"></script>
+
     <!--end::Page Vendors Scripts -->
     <!--begin::Page Resources -->
+
+    <script type="text">
+        var androidID = 0;
+    </script>
+
+
+
+    <script type="text/javascript">
+        function render(props) {
+            return function (tok, i) {
+                return (i % 2) ? props[tok] : tok;
+            };
+        }
+
+        function loadApps() {
+            var app = $('#Aplicativo').val();
+
+            if (app.trim() == '') {
+                return;
+            }
+            else {
+                
+                $.ajax({
+                    url: '@Url.Action("getApps", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: {
+                        nomeAplicativo: app,
+                        androidID: androidID
+                    },
+                    success: function (result) {
+                        var items = jQuery.parseJSON(result);
+
+                        var arr = jQuery.grep(items, function (a) {
+                            return a.Autorizado != 'S';
+                        });
+
+                        var arr_autorizado = jQuery.grep(items, function (a) {
+                            return a.Autorizado == 'S';
+                        });
+
+                        $(function () {
+                            var itemTpl = $('script[data-template="listitem"]').text().split(/\$\{(.+?)\}/g);
+                            $('.list-items').empty();
+
+                            $('.list-items').append(arr.map(function (item) {
+                                return itemTpl.map(render(item)).join('');
+                            }));
+                        });
+
+                        $(function () {
+                            var itemTpl = $('script[data-template="listitemautorizado"]').text().split(/\$\{(.+?)\}/g);
+                            $('.list-items-autorizado').empty();
+
+                            $('.list-items-autorizado').append(arr_autorizado.map(function (item) {
+                                return itemTpl.map(render(item)).join('');
+                            }));
+                        });
+
+                        galleryDragAndDrop("#test-container", "#gallery-one", "#gallery-two", ".appContainer");
+
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+
+
+                    }
+                });
+            }
+        }
+
+        function galleryDragAndDrop(mainContainer, containerOne, containerTwo, dragItem) {
+            setTimeout(function () {
+                    $(dragItem).draggable(
+                        {
+                            revert: "invalid",
+                            containment: mainContainer,
+                            helper: "clone",
+                            cursor: "move",
+                            drag: function (event, ui) {
+                                $(ui.helper.prevObject).addClass("box_current");
+                            },
+                            stop: function (event, ui) {
+                                $(ui.helper.prevObject).removeClass("box_current");
+                            }
+                        });
+
+                    $(containerTwo).droppable({
+                        accept: dragItem,
+                        activeClass: "ui-state-highlight",
+                        drop: function (event, ui) {
+                            acceptBoxIngalleryTwo(ui.draggable);
+
+                            $(ui.draggable).addClass("container_two");
+                            $(ui.draggable).removeClass("container_one");
+                        }
+                        ,accept: function (draggable) {
+                            return $(draggable).hasClass("container_one");
+                        }
+                    });
+
+                    $(containerOne).droppable({
+                        accept: dragItem,
+                        activeClass: "ui-state-highlight",
+                        drop: function (event, ui) {
+                            acceptBoxIngalleryOne(ui.draggable);
+
+                            $(ui.draggable).addClass("container_one");
+                            $(ui.draggable).removeClass("container_two");
+                        }
+                        ,accept: function (draggable) {
+                            return $(draggable).hasClass("container_two");
+                        }
+                    });
+                 }, 500);
+
+           function acceptBoxIngalleryTwo(item) {
+
+                var id_app = $(item.find("input:hidden")[0]).val();
+                var descricao = $(item.find("input:hidden")[1]).val();
+                var packageName = $(item.find("input:hidden")[2]).val();
+                var dataCoverLarge = $(item.find("input:hidden")[3]).val();
+                var dataCoverSmall = $(item.find("input:hidden")[4]).val();
+                var incluir = 'S';
+                
+                $.ajax({
+                url: '@Url.Action("sendApps", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                    data: {
+                        androidID: androidID,
+                        id_app: id_app,
+                        descricao: descricao,
+                        packageName: packageName,
+                        dataCoverLarge: dataCoverLarge,
+                        dataCoverSmall: dataCoverSmall,
+                        incluir: incluir
+                    },
+                    success: function (result) {
+                        $(item).fadeOut(function () {
+                            $(containerTwo).append(item);
+                        });
+
+                        $(item).fadeIn();
+                        $(item).removeClass("box_current");
+                       
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+
+
+                    }
+                });
+            }
+
+            function acceptBoxIngalleryOne(item) {
+
+                var id_app = $(item.find("input:hidden")[0]).val();
+                var descricao = $(item.find("input:hidden")[1]).val();
+                var packageName = $(item.find("input:hidden")[2]).val();
+                var dataCoverLarge = $(item.find("input:hidden")[3]).val();
+                var dataCoverSmall = $(item.find("input:hidden")[4]).val();
+                var incluir = 'N';
+                
+                $.ajax({
+                url: '@Url.Action("sendApps", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                    data: {
+                        androidID: androidID,
+                        id_app: id_app,
+                        descricao: descricao,
+                        packageName: packageName,
+                        dataCoverLarge: dataCoverLarge,
+                        dataCoverSmall: dataCoverSmall,
+                        incluir: incluir
+                    },
+                    success: function (result) {
+                        $(item).fadeOut(function () {
+                            $(containerOne).append(item);
+                        });
+
+                        $(item).fadeIn();
+                        $(item).removeClass("box_current");
+                      
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+
+
+                    }
+                });
+
+
+            }
+        }
+
+         
+
+        $('#btnLookupUser').click(function () {
+            loadApps();
+        });
+
+
+        var carregaApps = function () {
+            
+            $.ajax({
+                url: '@Url.Action("getAcessos", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: {
+                    androidID: androidID
+                },
+                success: function (result) {
+                    var items = jQuery.parseJSON(result);
+
+                    $(function () {
+                        var itemTpl = $('#registrosAcesso').find('tr').first().clone();
+                        $('#registrosAcesso').empty();
+
+
+                        $(items).each(function (index) {
+                            var _clone = itemTpl.clone();
+                            $(_clone).find("#tdAcesso").html(this.Acesso);
+                            $(_clone).find("#tdDescricao").html(this.Descricao);
+                            $(_clone).find("#tddataCoverSmall").find('img').attr('src', this.dataCoverSmall);
+                            $('#registrosAcesso').append(_clone);
+                        });
+
+                    });
+                    $('#example').DataTable().clear();
+                    $('#example').DataTable().destroy();
+
+                    var table = $('#example').DataTable({
+                        responsive: true,
+                        "language": {
+                            "decimal": "",
+                            "emptyTable": "Consulta não retornou registros.",
+                            "info": "Exibindo _START_ até _END_ de _TOTAL_ registros",
+                            "infoEmpty": "Exibindo 0 até 0 de 0 registros",
+                            "infoFiltered": "(filtered from _MAX_ total entries)",
+                            "infoPostFix": "",
+                            "thousands": ",",
+                            "lengthMenu": "Exibir _MENU_ registros",
+                            "loadingRecords": "Carregando...",
+                            "processing": "Processando...",
+                            "search": "Pesquisar:",
+                            "zeroRecords": "Nâo existe resultado para esse filtro.",
+                            "paginate": {
+                                "first": "Primeiro",
+                                "last": "Ultimo",
+                                "next": "Próximo",
+                                "previous": "Anterior"
+                            },
+                            "aria": {
+                                "sortAscending": ": activate to sort column ascending",
+                                "sortDescending": ": activate to sort column descending"
+                            }
+                        }
+                    });
+
+                    new $.fn.dataTable.FixedHeader(table);
+
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+
+
+                }
+            });
+
+
+            
+            $.ajax({
+                url: '@Url.Action("getAppsList", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: {
+                    androidID: androidID
+                },
+                success: function (result) {
+                    var items = jQuery.parseJSON(result);
+
+                    var arr = jQuery.grep(items, function (a) {
+                        return a.Autorizado != 'S';
+                    });
+
+                    var arr_autorizado = jQuery.grep(items, function (a) {
+                        return a.Autorizado == 'S';
+                    });
+
+                    $(function () {
+                        var itemTpl = $('script[data-template="listitem"]').text().split(/\$\{(.+?)\}/g);
+                        $('.list-items').empty();
+
+                        $('.list-items').append(arr.map(function (item) {
+                            return itemTpl.map(render(item)).join('');
+                        }));
+                    });
+
+                    $(function () {
+                        var itemTpl = $('script[data-template="listitemautorizado"]').text().split(/\$\{(.+?)\}/g);
+                        $('.list-items-autorizado').empty();
+
+                        $('.list-items-autorizado').append(arr_autorizado.map(function (item) {
+                            return itemTpl.map(render(item)).join('');
+                        }));
+                    });
+
+                    galleryDragAndDrop("#test-container", "#gallery-one", "#gallery-two", ".appContainer");
+
+                    
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+
+
+                }
+            });
+
+        };
+
+          jQuery.browser = {};
+            (function () {
+                jQuery.browser.msie = false;
+                jQuery.browser.version = 0;
+                if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+                    jQuery.browser.msie = true;
+                    jQuery.browser.version = RegExp.$1;
+                }
+            })();
+
+
+    </script>
 
     <script src="~/Scripts/Home/configurarDispositivos.js"></script>
 }

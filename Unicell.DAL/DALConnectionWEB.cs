@@ -4,6 +4,8 @@ using System.Linq;
 using Unicell.DTO;
 using Dapper;
 using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Unicell.DAL
 {
@@ -58,13 +60,13 @@ namespace Unicell.DAL
             {
                 Utils.DapperConnection.Execute("MANTER_MOBILE", new
                 {
-                    ANDROID_ID = androidID,
-                    GEO_LOCALIZACAO = geoLocation,
-                    ANDROID_STATUS = androidStatus,
-                    NOME_FUNCIONARIO = nomeFuncionario,
-                    USERID = UserID,
-                    ICON = Icon
-                });
+                    @ANDROID_ID = androidID,
+                    @GEO_LOCALIZACAO = geoLocation,
+                    @ANDROID_STATUS = androidStatus,
+                    @NOME_FUNCIONARIO = nomeFuncionario,
+                    @USERID = UserID,
+                    @ICON = Icon
+                }, commandType: CommandType.StoredProcedure);
             }
             catch (Exception)
             {
@@ -80,16 +82,16 @@ namespace Unicell.DAL
             {
                 Utils.DapperConnection.Execute("MANTER_ACESSO_MOBILE", new
                 {
-                    ANDROID_ID = androidID,
-                    ID_APP = id_app,
-                    PACKAGE_NAME = packageName,
-                    DESCRICAO = descricao,
-                    DATA_COVER_SMALL = dataCoverSmall,
-                    DATA_COVER_LARGE = dataCoverLarge,
-                    INCLUIR = incluir
-                });
+                    @ANDROID_ID = androidID,
+                    @ID_APP = id_app,
+                    @PACKAGE_NAME = packageName,
+                    @DESCRICAO = descricao,
+                    @DATA_COVER_SMALL = dataCoverSmall,
+                    @DATA_COVER_LARGE = dataCoverLarge,
+                    @INCLUIR = incluir == 'S'
+                }, commandType: CommandType.StoredProcedure);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -129,6 +131,62 @@ namespace Unicell.DAL
         public static List<string> SendSMS()
         {
             return Utils.DapperConnection.Query(" SELECT TELEFONE FROM NUMERO_TELEFONE ").Select(item => (string)item.TELEFONE).ToList();
+        }
+
+        public static List<AppMetadata> getAppList(string name, string androidId)
+        {
+            //List<AppMetadata> retorno = getAppListByRegex(name,
+            //    "<img.+?src=[\"'](.+?)[\"'].+?>|<span class=\"preview-overlay-container\" data-docid=[\"'](.+?)[\"'].+?>",
+            //    "https://play.google.com/store/search?c=apps&q=");
+
+            //List<AppMetadata> retornoDB = getApps(retorno.Select(x => x.PackageName).ToList(), androidId);
+            //return retornoDB.Union(retorno, new AppMetadataComparer()).ToList();
+
+            List<AppMetadata> retorno = new List<AppMetadata>();
+
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["UNICELLLOCKER"].ConnectionString))
+            {
+                con.Open();
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand(" SELECT A.ID, A.PACKAGE_NAME, A.DESCRICAO, A.DATA_COVER_SMALL, A.DATA_COVER_LARGE, " +
+                                                            " CASE WHEN AP.ID_APP IS NULL THEN('N') ELSE 'S' END AS AUTORIZADO " +
+                                                            " FROM APP A " +
+                                                            " LEFT JOIN APP_AUTORIZADO AP ON A.ID = AP.ID_APP AND AP.ID_MOBILE = @ANDROID_ID " +
+                                                            " WHERE A.PACKAGE_NAME LIKE @PACKAGE_NAME OR AP.ID_APP is not null", con))
+                    {
+
+                        cmd.Parameters.AddWithValue("@PACKAGE_NAME", "%" + name + "%");
+                        cmd.Parameters.AddWithValue("@ANDROID_ID", androidId);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                retorno.Add(new AppMetadata()
+                                {
+                                    Id = reader.GetInt32(0),
+                                    PackageName = reader.GetString(1),
+                                    Descricao = reader.GetString(2),
+                                    dataCoverSmall = reader.GetString(3),
+                                    dataCoverLarge = reader.GetString(4),
+                                    Autorizado = reader.GetString(5)
+                                });
+                            }
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    return retorno;
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+
+            return retorno;
         }
 
         public static List<AppMetadataDTO> getApps(List<string> packageNames, string androidId)

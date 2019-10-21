@@ -60,10 +60,19 @@ var DatatablesDataSourceAjaxServer = {
 
         $(element).find('tbody').on('click', 'tr', function () {
             var data = table.row(this).data();
-          
+
+            androidID = data.ANDROID_ID;
+            $('#tabela').hide();
+            $('#apps').show();
+            carregaApps();
         });
     }
 };
 jQuery(document).ready(function () {
     DatatablesDataSourceAjaxServer.init();
+
+    $('#btnCancelar').click(function () {
+        $('#tabela').show();
+        $('#apps').hide();
+    });
 });
