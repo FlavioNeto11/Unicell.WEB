@@ -39,7 +39,7 @@ namespace Unicell.WEB.Controllers
             return View();
         }
 
-        public ActionResult ConfigurarFuncionario()
+        public ActionResult ConfigurarFuncionarios()
         {
             return View();
         }
@@ -90,7 +90,7 @@ namespace Unicell.WEB.Controllers
             }
             else
             {
-                var retorno = Business.WebBLL.getMobile(UsuarioLogado.Usuario.UserID, 10000, 1, search);
+                var retorno = Business.WebBLL.GetCargo(UsuarioLogado.Usuario.ID_Empresa, 10000, 1, search);
                 return Json(retorno, JsonRequestBehavior.AllowGet);
             }
         }
@@ -127,7 +127,7 @@ namespace Unicell.WEB.Controllers
             }
             else
             {
-                var retorno = Business.WebBLL.getMobile(UsuarioLogado.Usuario.UserID, 10000, 1, search);
+                var retorno = Business.WebBLL.GetFuncionario(UsuarioLogado.Usuario.ID_Empresa, 10000, 1, search);
                 return Json(retorno, JsonRequestBehavior.AllowGet);
             }
         }
