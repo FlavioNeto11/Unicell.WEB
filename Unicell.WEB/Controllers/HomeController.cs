@@ -34,6 +34,16 @@ namespace Unicell.WEB.Controllers
             return View();
         }
 
+        public ActionResult ConfigurarCargo()
+        {
+            return View();
+        }
+
+        public ActionResult ConfigurarFuncionario()
+        {
+            return View();
+        }
+
         [HttpPost]
         [HandleErrorWithAjaxFilter]
         [Route("GetMobile")]
