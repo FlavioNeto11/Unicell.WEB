@@ -66,6 +66,62 @@ namespace Unicell.WEB.Controllers
             }
         }
 
+        [HttpPost]
+        [HandleErrorWithAjaxFilter]
+        [Route("GetCargo")]
+        public JsonResult GetCargo(int? draw, int? start, int? length, string search)
+        {
+            if (draw != null)
+            {
+                int? page = (start.HasValue ? start.Value / length : 0) + 1;
+                var retorno = Business.WebBLL.GetCargo(UsuarioLogado.Usuario.ID_Empresa, length ?? 5, page.Value, search);
+                retorno.draw = draw;
+                return Json(retorno, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var retorno = Business.WebBLL.getMobile(UsuarioLogado.Usuario.UserID, 10000, 1, search);
+                return Json(retorno, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        [HandleErrorWithAjaxFilter]
+        [Route("SetCargo")]
+        public JsonResult SetCargo(string NM_CARGO, int? ID)
+        {
+            var retorno = Business.WebBLL.SetCargo(UsuarioLogado.Usuario.ID_Empresa, NM_CARGO, ID);
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [HandleErrorWithAjaxFilter]
+        [Route("SetFuncionario")]
+        public JsonResult SetFuncionario(string NM_FUNCIONARIO, int? ID, int? ID_CARGO, string CPF, string RG, bool? GENERO)
+        {
+            var retorno = Business.WebBLL.SetFuncionario(UsuarioLogado.Usuario.ID_Empresa, NM_FUNCIONARIO, ID, ID_CARGO, CPF, RG, GENERO);
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [HandleErrorWithAjaxFilter]
+        [Route("GetFuncionario")]
+        public JsonResult GetFuncionario(int? draw, int? start, int? length, string search)
+        {
+            if (draw != null)
+            {
+                int? page = (start.HasValue ? start.Value / length : 0) + 1;
+                var retorno = Business.WebBLL.GetFuncionario(UsuarioLogado.Usuario.ID_Empresa, length ?? 5, page.Value, search);
+                retorno.draw = draw;
+                return Json(retorno, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var retorno = Business.WebBLL.getMobile(UsuarioLogado.Usuario.UserID, 10000, 1, search);
+                return Json(retorno, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public GoogleAdressDTO getAdress(string geo)
         {
             try

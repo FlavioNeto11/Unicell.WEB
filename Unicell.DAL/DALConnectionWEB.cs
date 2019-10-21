@@ -186,5 +186,33 @@ namespace Unicell.DAL
                 sucesso = query.ReadFirst<SucessoDTO>()
             };
         }
+
+        public static SucessoDTO SetCargo(int? ID_EMPRESA, string NM_CARGO, int? ID)
+        {
+            var query = Utils.DapperConnection.QueryFirst<SucessoDTO>("SET_CARGO", new
+            {
+                ID_EMPRESA = ID_EMPRESA,
+                NM_CARGO = NM_CARGO,
+                ID = ID,
+            }, commandType: CommandType.StoredProcedure);
+
+            return query;
+        }
+
+        public static SucessoDTO SetFuncionario(int? ID_EMPRESA, string NM_FUNCIONARIO, int? ID, int? ID_CARGO, string CPF, string RG, bool? GENERO)
+        {
+            var query = Utils.DapperConnection.QueryFirst<SucessoDTO>("SET_FUNCIONARIO", new
+            {
+                ID_EMPRESA = ID_EMPRESA,
+                NM_FUNCIONARIO = NM_FUNCIONARIO,
+                ID = ID,
+                ID_CARGO = ID_CARGO,
+                CPF = CPF,
+                RG = RG,
+                GENERO = GENERO,
+            }, commandType: CommandType.StoredProcedure);
+
+            return query;
+        }
     }
 }

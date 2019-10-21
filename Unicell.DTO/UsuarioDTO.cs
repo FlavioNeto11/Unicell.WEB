@@ -8,5 +8,6 @@ namespace Unicell.DTO
     {
         public string UserName { get; set; }
         public int UserID { get; set; }
+        public int ID_Empresa { get; set; }
     }
 }

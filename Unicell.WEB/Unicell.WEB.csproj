@@ -799,7 +799,8 @@
     <None Include="Properties\PublishProfiles\unicelllocker - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\unicelllocker - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\Home\ajax-server-side.js" />
+    <Content Include="Scripts\Home\configurarCargo.js" />
+    <Content Include="Scripts\Home\configurarDispositivos.js" />
     <Content Include="Scripts\Home\google-maps.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

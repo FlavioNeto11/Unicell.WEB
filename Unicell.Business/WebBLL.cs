@@ -54,5 +54,11 @@ namespace Unicell.Business
 
         public static CargoDTO GetCargo(int? ID_EMPRESA, int? QtdPorPagina, int? Pagina, string search)
         { return DAL.DALConnectionWEB.GetCargo(ID_EMPRESA, QtdPorPagina, Pagina, search); }
+
+        public static SucessoDTO SetCargo(int? ID_EMPRESA, string NM_CARGO, int? ID)
+        { return DAL.DALConnectionWEB.SetCargo(ID_EMPRESA, NM_CARGO, ID); }
+
+        public static SucessoDTO SetFuncionario(int? ID_EMPRESA, string NM_FUNCIONARIO, int? ID, int? ID_CARGO, string CPF, string RG, bool? GENERO)
+        { return DAL.DALConnectionWEB.SetFuncionario(ID_EMPRESA, NM_FUNCIONARIO, ID, ID_CARGO, CPF, RG, GENERO); }
     }
 }

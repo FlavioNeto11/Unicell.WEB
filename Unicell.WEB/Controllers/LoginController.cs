@@ -29,7 +29,8 @@ namespace Unicell.WEB.Controllers
             {
                 UsuarioLogado.Usuario = new DTO.UsuarioDTO() {
                     UserID = retorno.UserID,
-                    UserName = retorno.UserName
+                    UserName = retorno.UserName,
+                    ID_Empresa = retorno.ID_Empresa
                 };
             }
 

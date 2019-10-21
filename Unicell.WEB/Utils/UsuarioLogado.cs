@@ -23,12 +23,13 @@ namespace Mirante.Util
                     return new UsuarioDTO()
                     {
                         UserName = usuario["UserName"],
-                        UserID = usuario["UserID"] ?? 0
+                        UserID = usuario["UserID"] ?? 0,
+                        ID_Empresa = usuario["ID_Empresa"] ?? 0
                     };
                 }
                 catch (Exception ex)
                 {
-                    return new UsuarioDTO() { UserID = 0 };
+                    return new UsuarioDTO() { UserID = 0, ID_Empresa = 0 };
                 }
             }
             set
