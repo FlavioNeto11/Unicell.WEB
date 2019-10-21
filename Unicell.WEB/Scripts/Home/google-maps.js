@@ -18,15 +18,74 @@ var _GoogleMaps = function () {
     };
 
     var loadCoord = function () {
+
+        var mapTemplate = + ' <div class="m-widget24"> '
+                          + '		<div class="m-widget24__item"> '
+                          + '			<h4 class="m-widget24__title"> '
+                          + '				{0} '
+                          + '			</h4> '
+                          + '			<br> '
+                          + '			<span class="m-widget24__desc"> '
+                          + '				{3} '
+                          + '			</span> '
+                          + '			<div class="m--space-10"></div> '
+                          + '			<div class="progress m-progress--sm"> '
+                          + '				<div class="progress-bar m--bg-brand" role="progressbar" style="width: {1}%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div> '
+                          + '			</div> '
+                          + '			<span class="m-widget24__change"> '
+                          + '				Bateria '
+                          + '			</span> '
+                          + '			<span class="m-widget24__number"> '
+                          + '				{2}% '
+                          + '			</span> '
+                          + '			<div class="m--space-10"></div> '
+                          + '			<div class="progress m-progress--sm"> '
+                          + '				<div class="progress-bar m--bg-brand" role="progressbar" style="width: {4}%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div> '
+                          + '			</div> '
+                          + '			<span class="m-widget24__change"> '
+                          + '				Sinal '
+                          + '			</span> '
+                          + '			<span class="m-widget24__number"> '
+                          + '				{5}% '
+                          + '			</span> '
+                          + '		</div> '
+            + '	</div> ';
+
+        var getMapTemplate = function (el) {
+            return mapTemplate
+                .replace('{0}', (el.NM_FUNCIONARIO) ? el.NM_FUNCIONARIO : el.ANDROID_ID)
+                .replace('{1}', el.CHARGELEVEL * 100)
+                .replace('{2}', el.CHARGELEVEL * 100)
+                .replace('{3}', (el.ISCHARGING) ? 'Na bateria' : 'Carregando')
+                .replace('{4}', el.SIGNALSTRENGTH * 25)
+                .replace('{5}', el.SIGNALSTRENGTH * 25);
+        };
+
+        var data = {
+            search: $('#searchBox').val()
+        };
+
         $.ajax({
             type: "POST",
             url: MapPath.GetMapPost,
+            data: JSON.stringify(data),
             dataType: 'json',
             contentType: 'application/json',
             success: function (result) {
 
                 if (firstTime)
                     $('#m_gmap_3').height($(window).height());
+
+                $.each(markers, function () {
+                    var _m = this;
+                    if (!result.data.find(item => item.ANDROID_ID === _m.details.androidID)) {
+                        _m.setMap(null);
+
+                        markers = jQuery.grep(markers, function (value) {
+                            return value !== _m;
+                        });
+                    }
+                });
 
                 $.each(result.data, function () {
                     var el = this;
@@ -40,24 +99,42 @@ var _GoogleMaps = function () {
                         if (marker) {
                             var latlng = new google.maps.LatLng(lat, lng);
                             marker.setPosition(latlng);
+
+                            var infowindow = new google.maps.InfoWindow({
+                                content: getMapTemplate(el)
+                            });
+
+                            google.maps.event.clearInstanceListeners(marker);
+
+                            google.maps.event.addListener(marker, 'click', function () {
+                                infowindow.open(map, marker);
+                            });
+
                         }
                         else {
-                            markers.push(
-                                map.addMarker({
-                                    lat: lat,
-                                    lng: lng,
-                                    title: el.NM_FUNCIONARIO,
-                                    infoWindow: {
-                                        content: '<span style="color:#000">' + el.NM_FUNCIONARIO + '</span>'
-                                    },
-                                    details: {
-                                        androidID: el.ANDROID_ID
-                                    },
-                                    click: function (e) {
-                                        if (console.log) console.log(e);
-                                        selectedANDROID_ID = e.details.androidID;
-                                    }
-                                }));
+                            var _marker = map.addMarker({
+                                lat: lat,
+                                lng: lng,
+                                title: (el.NM_FUNCIONARIO) ? el.NM_FUNCIONARIO : el.ANDROID_ID,
+                                
+                                details: {
+                                    androidID: el.ANDROID_ID
+                                },
+                                click: function (e) {
+                                    if (console.log) console.log(e);
+                                    selectedANDROID_ID = e.details.androidID;
+                                }
+                            });
+
+                            var _infowindow = new google.maps.InfoWindow({
+                                content: getMapTemplate(el)
+                            });
+
+                            google.maps.event.addListener(_marker, 'click', function () {
+                                _infowindow.open(map, _marker);
+                            });
+
+                            markers.push(_marker);
                         }
                     }
                 });
@@ -74,6 +151,19 @@ var _GoogleMaps = function () {
             },
             error: function (xhr, status, error) {
                 console.log(xhr.statusText);
+
+                $.each(markers, function () {
+                    var _m = this;
+                   
+                    _m.setMap(null);
+
+                    markers = jQuery.grep(markers, function (value) {
+                        return value !== _m;
+                    });
+                  
+                });
+
+                loadCoord();
             }
         });
     };
@@ -126,7 +216,7 @@ jQuery(document).ready(function () {
     // Create a function that the hub can call back to display messages.
     chat.client.sendMessage = function (message, name) {
         // Add the message to the page.
-        if (name != displayname)
+        if (name !== displayname)
             $('#mensagens').append(templateMensagemTerceiro.replace('{remetente}', name).replace('{mensagem}', message));
         else
             $('#mensagens').append(templateMensagem.replace('{mensagem}', message));
@@ -150,10 +240,10 @@ jQuery(document).ready(function () {
         refreshUsuarios();
 
         $('#messageText').keydown(function (e) {
-            if (e.keyCode == 13) {
+            if (e.keyCode === 13) {
 
                 $.map(usuarios, function (item) {
-                    if (item.username == selectedANDROID_ID) {
+                    if (item.username === selectedANDROID_ID) {
                         chat.server.sendMessage($('#messageText').val(), item.connectionID);
                         // Clear text box and reset focus for next comment.
                         $('#messageText').val('').focus();

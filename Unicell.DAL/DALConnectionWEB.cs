@@ -9,7 +9,7 @@ namespace Unicell.DAL
 {
     public static class DALConnectionWEB
     {
-        public static MobileDTO getMobile(int UserID, int? QtdPorPagina, int? Pagina, string search)
+        public static MobileDTO getMobile(int UserID, int? QtdPorPagina = 10000, int? Pagina = 1, string search = null)
         {
             try
             {
@@ -151,6 +151,40 @@ namespace Unicell.DAL
                 dataCoverLarge = item.DATA_COVER_LARGE,
                 Autorizado = item.AUTORIZADO
             }).ToList();
+        }
+
+        public static CargoDTO GetCargo(int? ID_EMPRESA, int? QtdPorPagina, int? Pagina, string search)
+        {
+            var query = Utils.DapperConnection.QueryMultiple("GET_CARGO", new
+            {
+                ID_EMPRESA = ID_EMPRESA,
+                QtdPorPagina = QtdPorPagina,
+                Pagina = Pagina,
+                search = search,
+            }, commandType: CommandType.StoredProcedure);
+
+            return new CargoDTO()
+            {
+                data = query.Read<CargoDTO.Result>().ToList(),
+                sucesso = query.ReadFirst<SucessoDTO>()
+            };
+        }
+
+        public static FuncionarioDTO GetFuncionario(int? ID_EMPRESA, int? QtdPorPagina, int? Pagina, string search)
+        {
+            var query = Utils.DapperConnection.QueryMultiple("GET_FUNCIONARIO", new
+            {
+                ID_EMPRESA = ID_EMPRESA,
+                QtdPorPagina = QtdPorPagina,
+                Pagina = Pagina,
+                search = search,
+            }, commandType: CommandType.StoredProcedure);
+
+            return new FuncionarioDTO()
+            {
+                data = query.Read<FuncionarioDTO.Result>().ToList(),
+                sucesso = query.ReadFirst<SucessoDTO>()
+            };
         }
     }
 }

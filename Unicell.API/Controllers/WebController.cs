@@ -16,7 +16,7 @@ namespace Unicell.API.Controllers
     [RoutePrefix("Web")]
     public class WebController : ApiController
     {
-        public List<MobileDTO> getMobile([FromBody]string UserID)
+        public MobileDTO getMobile([FromBody]int UserID)
         {
             return DALConnectionWEB.getMobile(UserID);
         }

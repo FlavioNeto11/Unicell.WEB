@@ -2,7 +2,7 @@ var DatatablesDataSourceAjaxServer = {
     init: function () {
         var element = "#m_table_1";
 
-        $(element).DataTable({
+        var table = $(element).DataTable({
             responsive: !0,
             searchDelay: 500,
             processing: !0,
@@ -41,16 +41,26 @@ var DatatablesDataSourceAjaxServer = {
             },
             
             columns: [{
-                data: "ANDROID_ID"
+                data: "ANDROID_ID",
+                title: "IMEI"
             }, {
-                    data: "NM_FUNCIONARIO"
+                    data: "NM_FUNCIONARIO",
+                title: "Funcionário"
             }, {
-                    data: "GEO_LOCALIZACAO"
+                    data: "ENDERECO",
+                title: "Endereço"
             }, {
-                    data: "ULTIMO_ACESSO"
+                    data: "ULTIMO_ACESSO_STRING",
+                title: "Acesso"
             }, {
-                    data: "ANDROID_STATUS"
+                    data: "ANDROID_STATUS",
+                title: "Status"
             }]
+        });
+
+        $(element).find('tbody').on('click', 'tr', function () {
+            var data = table.row(this).data();
+          
         });
     }
 };

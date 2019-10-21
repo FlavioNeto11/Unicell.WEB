@@ -48,5 +48,11 @@ namespace Unicell.Business
         {
             return DAL.DALConnectionWEB.getApps(packageNames, androidId);
         }
+
+        public static FuncionarioDTO GetFuncionario(int? ID_EMPRESA, int? QtdPorPagina, int? Pagina, string search)
+        { return DAL.DALConnectionWEB.GetFuncionario(ID_EMPRESA, QtdPorPagina, Pagina, search); }
+
+        public static CargoDTO GetCargo(int? ID_EMPRESA, int? QtdPorPagina, int? Pagina, string search)
+        { return DAL.DALConnectionWEB.GetCargo(ID_EMPRESA, QtdPorPagina, Pagina, search); }
     }
 }
