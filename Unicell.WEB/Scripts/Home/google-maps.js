@@ -242,15 +242,9 @@ jQuery(document).ready(function () {
         $('#messageText').keydown(function (e) {
             if (e.keyCode === 13) {
 
-                $.map(usuarios, function (item) {
-                    if (item.username === selectedANDROID_ID) {
-                        chat.server.sendMessage($('#messageText').val(), item.connectionID);
-                        // Clear text box and reset focus for next comment.
-                        $('#messageText').val('').focus();
-                    }
-                });
-
-
+                chat.server.sendMessage($('#messageText').val(), selectedANDROID_ID);
+                // Clear text box and reset focus for next comment.
+                $('#messageText').val('').focus();
 
             }
         });

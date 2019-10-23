@@ -21,6 +21,7 @@ namespace Unicell.DTO
             public bool? ACESSO_IRRESTRITO { get; set; }
             public bool? ACESSO_LOJA { get; set; }
             public bool? ACESSO_CONFIGURACAO { get; set; }
+            public int? ID_EMPRESA { get; set; }
         }
     }
 }

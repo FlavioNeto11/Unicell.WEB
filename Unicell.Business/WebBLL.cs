@@ -9,9 +9,9 @@ namespace Unicell.Business
 {
     public class WebBLL
     {
-        public static MobileDTO getMobile(int UserID, int? QtdPorPagina = 10000, int? Pagina = 1, string search = null)
+        public static MobileDTO getMobile(int ID_EMPRESA, int? QtdPorPagina = 10000, int? Pagina = 1, string search = null)
         {
-            return DAL.DALConnectionWEB.getMobile(UserID, QtdPorPagina, Pagina, search);
+            return DAL.DALConnectionWEB.getMobile(ID_EMPRESA, QtdPorPagina, Pagina, search);
         }
         public static List<AppMetadataDTO> getAppListByRegex(string name, string pattern, string url, bool primeiro = false, string packageName = "")
         {

@@ -25,7 +25,7 @@ namespace Unicell.WEB.Controllers
 
         public ActionResult GoogleMaps()
         {
-            ViewBag.UserName = UsuarioLogado.Usuario.UserName;
+            ViewBag.ID_Empresa = UsuarioLogado.Usuario.ID_Empresa;
             return View();
         }
 
@@ -44,6 +44,12 @@ namespace Unicell.WEB.Controllers
             return View();
         }
 
+        public ActionResult ConfigurarQRCode()
+        {
+            ViewBag.ID_Empresa = UsuarioLogado.Usuario.ID_Empresa;
+            return View();
+        }
+
         [HttpPost]
         [HandleErrorWithAjaxFilter]
         [Route("GetMobile")]
@@ -52,7 +58,7 @@ namespace Unicell.WEB.Controllers
             if (draw != null)
             {
                 int? page = (start.HasValue ? start.Value / length : 0) + 1;
-                var retorno = Business.WebBLL.getMobile(UsuarioLogado.Usuario.UserID, length ?? 5, page.Value, search);
+                var retorno = Business.WebBLL.getMobile(UsuarioLogado.Usuario.ID_Empresa, length ?? 5, page.Value, search);
                 try
                 {
                     foreach (var item in retorno.data)
@@ -71,7 +77,7 @@ namespace Unicell.WEB.Controllers
             }
             else
             {
-                var retorno = Business.WebBLL.getMobile(UsuarioLogado.Usuario.UserID, 10000,1,search);
+                var retorno = Business.WebBLL.getMobile(UsuarioLogado.Usuario.ID_Empresa, 10000,1,search);
                 return Json(retorno, JsonRequestBehavior.AllowGet);
             }
         }

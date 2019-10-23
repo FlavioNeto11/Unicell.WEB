@@ -11,13 +11,13 @@ namespace Unicell.DAL
 {
     public static class DALConnectionWEB
     {
-        public static MobileDTO getMobile(int UserID, int? QtdPorPagina = 10000, int? Pagina = 1, string search = null)
+        public static MobileDTO getMobile(int ID_EMPRESA, int? QtdPorPagina = 10000, int? Pagina = 1, string search = null)
         {
             try
             {
                 var query = Utils.DapperConnection.QueryMultiple("GET_MOBILE", new
                 {
-                    @USER_ID = UserID,
+                    @ID_EMPRESA = ID_EMPRESA,
                     QtdPorPagina = QtdPorPagina,
                     Pagina = Pagina,
                     search = search,

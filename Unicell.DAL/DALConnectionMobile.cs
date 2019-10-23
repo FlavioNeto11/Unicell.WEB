@@ -42,5 +42,15 @@ namespace Unicell.DAL
                 Configuracao = query.ReadFirst<MobileResultDTO.Configuracoes>()
             };
         }
+
+        public static void SendEmpresa(int ID_EMPRESA, string ANDROID_ID)
+        {
+            Utils.DapperConnection.Execute("UPDATE MOBILE SET ID_EMPRESA = @ID_EMPRESA WHERE ANDROID_ID = @ANDROID_ID", new
+            {
+                @ANDROID_ID = ANDROID_ID,
+                @ID_EMPRESA = ID_EMPRESA
+            });
+        }
+
     }
 }

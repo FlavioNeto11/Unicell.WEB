@@ -26,5 +26,12 @@ namespace Unicell.API.Controllers
         {
             return DALConnectionMobile.SendMobile(model.androidID, model.geoLocation, model.androidStatus, model.telefones, model.isCharging, model.signalStrength, model.chargeLevel);
         }
+
+        [HttpPost]
+        [Route("SendEmpresa")]
+        public void SendEmpresa([FromBody] ModelEmpresaMobile model)
+        {
+            DALConnectionMobile.SendEmpresa(model.ID_EMPRESA, model.ANDROID_ID);
+        }
     }
 }
