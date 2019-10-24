@@ -33,9 +33,9 @@ namespace Unicell.API.Controllers
             return DALConnectionWEB.SendMobile(androidID, geoLocation, androidStatus, nomeFuncionario, UserID, Icon);
         }
 
-        public bool SendACessoMobile([FromBody]string androidID, [FromBody] Nullable<int> id_app, [FromBody] string packageName, [FromBody] string descricao, [FromBody] string dataCoverSmall, [FromBody] string dataCoverLarge, [FromBody] char incluir)
+        public bool SendACessoMobile([FromBody]string androidID, [FromBody] Nullable<int> id_app, [FromBody] string packageName, [FromBody] string descricao, [FromBody] string dataCoverSmall, [FromBody] string dataCoverLarge, [FromBody] char incluir, bool autorizar)
         {
-            return DALConnectionWEB.SendACessoMobile(androidID, id_app, packageName, descricao, dataCoverSmall, dataCoverLarge, incluir);
+            return DALConnectionWEB.SendACessoMobile(androidID, id_app, packageName, descricao, dataCoverSmall, dataCoverLarge, incluir, autorizar);
         }
 
         public void SetIcon([FromBody]string icon, [FromBody] string androidId)

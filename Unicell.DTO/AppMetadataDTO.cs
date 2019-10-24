@@ -12,6 +12,6 @@ namespace Unicell.DTO
         public string Acesso { get; set; }
         public string dataCoverSmall { get; set; }
         public string dataCoverLarge { get; set; }
-        public string Autorizado { get; set; }
+        public bool? Autorizado { get; set; }
     }
 }

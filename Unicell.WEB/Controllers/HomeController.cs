@@ -161,9 +161,9 @@ namespace Unicell.WEB.Controllers
         [HttpPost]
         [HandleErrorWithAjaxFilter]
         [Route("sendApps")]
-        public JsonResult sendApps(string androidID, Nullable<int> id_app, string packageName, string descricao, string dataCoverSmall, string dataCoverLarge, char incluir)
+        public JsonResult sendApps(string androidID, Nullable<int> id_app, string packageName, string descricao, string dataCoverSmall, string dataCoverLarge, bool incluir, bool autorizar)
         {
-            return Json(JsonConvert.SerializeObject(Business.WebBLL.SendACessoMobile(androidID, (id_app == 0) ? null : id_app, packageName, descricao, dataCoverSmall, dataCoverLarge, incluir)));
+            return Json(JsonConvert.SerializeObject(Business.WebBLL.SendACessoMobile(androidID, (id_app == 0) ? null : id_app, packageName, descricao, dataCoverSmall, dataCoverLarge, incluir, autorizar)));
         }
 
         [HttpPost]

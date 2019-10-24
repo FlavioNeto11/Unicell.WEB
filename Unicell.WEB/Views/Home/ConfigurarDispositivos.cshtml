@@ -1,5 +1,5 @@
 ﻿		<!-- BEGIN: Subheader -->
-    <link href="~/dist/default/assets/vendors/custom/jquery-ui/jquery-ui.bundle.css" rel="stylesheet" />
+<link href="~/dist/default/assets/vendors/custom/jquery-ui/jquery-ui.bundle.css" rel="stylesheet" />
 <style>
 
 
@@ -105,7 +105,7 @@
 <div class="m-subheader ">
     <div class="d-flex align-items-center">
         <div class="mr-auto">
-            <h3 class="m-subheader__title m-subheader__title--separator">Server-side processing Examples</h3>
+            <h3 class="m-subheader__title m-subheader__title--separator">Manutenção de acessos</h3>
             <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                 <li class="m-nav__item m-nav__item--home">
                     <a href="#" class="m-nav__link m-nav__link--icon">
@@ -115,19 +115,19 @@
                 <li class="m-nav__separator">-</li>
                 <li class="m-nav__item">
                     <a href="" class="m-nav__link">
-                        <span class="m-nav__link-text">DataTables</span>
+                        <span class="m-nav__link-text">Dashboard</span>
                     </a>
                 </li>
                 <li class="m-nav__separator">-</li>
                 <li class="m-nav__item">
                     <a href="" class="m-nav__link">
-                        <span class="m-nav__link-text">Data sources</span>
+                        <span class="m-nav__link-text">Configuração</span>
                     </a>
                 </li>
                 <li class="m-nav__separator">-</li>
                 <li class="m-nav__item">
                     <a href="" class="m-nav__link">
-                        <span class="m-nav__link-text">Ajax Server-side</span>
+                        <span class="m-nav__link-text">Manutenção de Acessos</span>
                     </a>
                 </li>
             </ul>
@@ -203,19 +203,19 @@
             <div class="m-portlet__head-caption">
                 <div class="m-portlet__head-title">
                     <h3 class="m-portlet__head-text">
-                        Ajax Sourced Server-side Processing
+                        Configurações
                     </h3>
                 </div>
             </div>
             <div class="m-portlet__head-tools">
                 <ul class="m-portlet__nav">
                     <li class="m-portlet__nav-item">
-                        <a href="#" class="btn btn-primary m-btn m-btn--pill m-btn--custom m-btn--icon m-btn--air">
-                            <span>
-                                <i class="la la-cart-plus"></i>
-                                <span>New Record</span>
-                            </span>
-                        </a>
+                        @*<a href="#" class="btn btn-primary m-btn m-btn--pill m-btn--custom m-btn--icon m-btn--air">
+                                <span>
+                                    <i class="la la-cart-plus"></i>
+                                    <span>New Record</span>
+                                </span>
+                            </a>*@
                     </li>
                     <li class="m-portlet__nav-item"></li>
                     <li class="m-portlet__nav-item">
@@ -298,20 +298,20 @@
             </div>
 
             <div id="apps" style="display:none;">
-                <fieldset>
-                    <legend>Nome funcionário</legend>
-                    <ol>
-                        <li>
-                            <label>Nome Funcionario</label>
-                            <input type="text" id="NomeFuncionario" />
-                        </li>
-                    </ol>
-                    <input type="submit" name="Command" value="Salvar" />
-                    <div style="margin-top: 20px;">
-                        <input class="form-control" type="checkbox" id="Icon" />
-                        <label>Exibir icone de instalação</label>
-                    </div>
-                </fieldset>
+                @*<fieldset>
+                        <legend>Nome funcionário</legend>
+                        <ol>
+                            <li>
+                                <label>Nome Funcionario</label>
+                                <input type="text" id="NomeFuncionario" />
+                            </li>
+                        </ol>
+                        <input type="submit" name="Command" value="Salvar" />
+                        <div style="margin-top: 20px;">
+                            <input class="form-control" type="checkbox" id="Icon" />
+                            <label>Exibir icone de instalação</label>
+                        </div>
+                    </fieldset>*@
                 <fieldset>
                     <legend>Pesquisar</legend>
                     <ol>
@@ -323,38 +323,6 @@
                     <input type="button" id="btnLookupUser" value="Pesquisar" />
                 </fieldset>
                 <fieldset>
-                    <script type="text/template" data-template="listitem">
-                        <div class="appContainer container_one">
-                            <img src="${dataCoverSmall}" alt="${Descricao}" />
-                            <span></span>
-
-                            <span class="cardTitle" title="${Descricao}" aria-hidden="true" tabindex="-1">
-                                ${Descricao} <span class="paragraph-end"></span>
-                            </span>
-                            <input type="hidden" value="${Id}" />
-                            <input type="hidden" value="${Descricao}" />
-                            <input type="hidden" value="${PackageName}" />
-                            <input type="hidden" value="${dataCoverLarge}" />
-                            <input type="hidden" value="${dataCoverSmall}" />
-                        </div>
-                    </script>
-
-                    <script type="text/template" data-template="listitemautorizado">
-                        <div class="appContainer container_two">
-                            <img src="${dataCoverSmall}" alt="${Descricao}" />
-                            <span></span>
-
-                            <span class="cardTitle" title="${Descricao}" aria-hidden="true" tabindex="-1">
-                                ${Descricao} <span class="paragraph-end"></span>
-                            </span>
-                            <input type="hidden" value="${Id}" />
-                            <input type="hidden" value="${Descricao}" />
-                            <input type="hidden" value="${PackageName}" />
-                            <input type="hidden" value="${dataCoverLarge}" />
-                            <input type="hidden" value="${dataCoverSmall}" />
-                        </div>
-                    </script>
-
                     <div id="test-container" class="test_container">
                         <div id="gallery-one" class="gallery_one list-items">
 
@@ -420,18 +388,64 @@
 
     <script src="~/dist/default/assets/vendors/custom/jquery-ui/jquery-ui.bundle.js"></script>
 
+    <script src="~/dist/default/assets/demo/default/custom/components/base/sweetalert2.js"></script>
+
     <!--end::Page Vendors Scripts -->
     <!--begin::Page Resources -->
 
-    <script type="text">
+    <script type="text/javascript">
         var androidID = 0;
     </script>
 
 
 
     <script type="text/javascript">
+ 
+        var template = `<div class="appContainer {containerClass}">
+                <img src="{dataCoverSmall}" alt="{Descricao}" />
+                <span></span>
+
+                <span class="cardTitle" title="{Descricao}" aria-hidden="true" tabindex="-1">
+                    {Descricao} <span class="paragraph-end"></span>
+                </span>
+            </div>`;
+
+        function loadAppsInner(result) {
+            $('.list-items').empty();
+            $('.list-items-autorizado').empty();
+
+            var items = jQuery.parseJSON(result);
+
+            $.each(items, function() {
+                var el = this;
+
+                var item = template
+                    .replace(/\{dataCoverSmall}/g, el.dataCoverSmall)
+                    .replace(/\{Descricao}/g, el.Descricao);
+
+                if (el.Autorizado == null) {
+                    item = $.parseHTML(item.replace(/\{containerClass}/g, 'container_one'));
+                    $(item).data("full", JSON.stringify(el));
+                    $('.list-items').append(item);
+                } else if (el.Autorizado == true) {
+                    item = $.parseHTML(item.replace(/\{containerClass}/g, 'container_two'));
+                    $(item).css('box-shadow', '0 2px 4px rgba(0,255,0,0.5)');
+                    $(item).data("full", JSON.stringify(el));
+                    $('.list-items-autorizado').append(item);
+                } else if (el.Autorizado == false) {
+                    item = $.parseHTML(item.replace(/\{containerClass}/g, 'container_two'));
+                    $(item).css('box-shadow', '0 2px 4px rgba(255,0,0,0.5)');
+                    $(item).data("full", JSON.stringify(el));
+                    $('.list-items-autorizado').append(item);
+                }
+
+            });
+
+            galleryDragAndDrop("#test-container", "#gallery-one", "#gallery-two", ".appContainer");
+        }
+
         function render(props) {
-            return function (tok, i) {
+            return function(tok, i) {
                 return (i % 2) ? props[tok] : tok;
             };
         }
@@ -441,9 +455,8 @@
 
             if (app.trim() == '') {
                 return;
-            }
-            else {
-                
+            } else {
+
                 $.ajax({
                     url: '@Url.Action("getApps", "Home")',
                     type: 'POST',
@@ -453,40 +466,13 @@
                         nomeAplicativo: app,
                         androidID: androidID
                     },
-                    success: function (result) {
-                        var items = jQuery.parseJSON(result);
+                    success: function(result) {
 
-                        var arr = jQuery.grep(items, function (a) {
-                            return a.Autorizado != 'S';
-                        });
-
-                        var arr_autorizado = jQuery.grep(items, function (a) {
-                            return a.Autorizado == 'S';
-                        });
-
-                        $(function () {
-                            var itemTpl = $('script[data-template="listitem"]').text().split(/\$\{(.+?)\}/g);
-                            $('.list-items').empty();
-
-                            $('.list-items').append(arr.map(function (item) {
-                                return itemTpl.map(render(item)).join('');
-                            }));
-                        });
-
-                        $(function () {
-                            var itemTpl = $('script[data-template="listitemautorizado"]').text().split(/\$\{(.+?)\}/g);
-                            $('.list-items-autorizado').empty();
-
-                            $('.list-items-autorizado').append(arr_autorizado.map(function (item) {
-                                return itemTpl.map(render(item)).join('');
-                            }));
-                        });
-
-                        galleryDragAndDrop("#test-container", "#gallery-one", "#gallery-two", ".appContainer");
+                        loadAppsInner(result);
 
 
                     },
-                    error: function (xhr, ajaxOptions, thrownError) {
+                    error: function(xhr, ajaxOptions, thrownError) {
 
 
                     }
@@ -495,122 +481,142 @@
         }
 
         function galleryDragAndDrop(mainContainer, containerOne, containerTwo, dragItem) {
-            setTimeout(function () {
-                    $(dragItem).draggable(
-                        {
-                            revert: "invalid",
-                            containment: mainContainer,
-                            helper: "clone",
-                            cursor: "move",
-                            drag: function (event, ui) {
-                                $(ui.helper.prevObject).addClass("box_current");
-                            },
-                            stop: function (event, ui) {
-                                $(ui.helper.prevObject).removeClass("box_current");
-                            }
-                        });
+            setTimeout(function() {
+                $(dragItem).draggable({
+                    revert: "invalid",
+                    containment: mainContainer,
+                    helper: "clone",
+                    cursor: "move",
+                    drag: function(event, ui) {
+                        $(ui.helper.prevObject).addClass("box_current");
+                    },
+                    stop: function(event, ui) {
+                        $(ui.helper.prevObject).removeClass("box_current");
+                    }
+                });
 
-                    $(containerTwo).droppable({
-                        accept: dragItem,
-                        activeClass: "ui-state-highlight",
-                        drop: function (event, ui) {
-                            acceptBoxIngalleryTwo(ui.draggable);
+                $(containerTwo).droppable({
+                    accept: dragItem,
+                    activeClass: "ui-state-highlight",
+                    drop: function(event, ui) {
+                        acceptBoxIngalleryTwo(ui.draggable);
 
-                            $(ui.draggable).addClass("container_two");
-                            $(ui.draggable).removeClass("container_one");
-                        }
-                        ,accept: function (draggable) {
-                            return $(draggable).hasClass("container_one");
+                        $(ui.draggable).addClass("container_two");
+                        $(ui.draggable).removeClass("container_one");
+                    },
+                    accept: function(draggable) {
+                        return $(draggable).hasClass("container_one");
+                    }
+                });
+
+                $(containerOne).droppable({
+                    accept: dragItem,
+                    activeClass: "ui-state-highlight",
+                    drop: function(event, ui) {
+                        acceptBoxIngalleryOne(ui.draggable);
+
+                        $(ui.draggable).addClass("container_one");
+                        $(ui.draggable).removeClass("container_two");
+                    },
+                    accept: function(draggable) {
+                        return $(draggable).hasClass("container_two");
+                    }
+                });
+            }, 500);
+
+            function acceptBoxIngalleryTwo(item) {
+                var el = JSON.parse($(item).data('full'));
+
+                var autorizar = false;
+
+                var executarBloqueio = function() {
+                    $.ajax({
+                        url: '@Url.Action("sendApps", "Home")',
+                        type: 'POST',
+                        dataType: 'json',
+                        async: true,
+                        data: {
+                            androidID: androidID,
+                            id_app: el.Id,
+                            descricao: el.Descricao,
+                            packageName: el.PackageName,
+                            dataCoverLarge: el.dataCoverLarge,
+                            dataCoverSmall: el.dataCoverSmall,
+                            incluir: true,
+                            autorizar: autorizar
+                        },
+                        success: function(result) {
+                            $(item).fadeOut(function () {
+                                $(containerTwo).append(item);
+                            });
+
+                            if (autorizar)
+                                $(item).css('box-shadow', '0 2px 4px rgba(0,255,0,0.5)');
+                            else
+                                $(item).css('box-shadow', '0 2px 4px rgba(255,0,0,0.5)');
+
+                            $(item).fadeIn();
+                            $(item).removeClass("box_current");
+
+                        },
+                        error: function(xhr, ajaxOptions, thrownError) {
+
+
                         }
                     });
+                };
 
-                    $(containerOne).droppable({
-                        accept: dragItem,
-                        activeClass: "ui-state-highlight",
-                        drop: function (event, ui) {
-                            acceptBoxIngalleryOne(ui.draggable);
-
-                            $(ui.draggable).addClass("container_one");
-                            $(ui.draggable).removeClass("container_two");
-                        }
-                        ,accept: function (draggable) {
-                            return $(draggable).hasClass("container_two");
-                        }
-                    });
-                 }, 500);
-
-           function acceptBoxIngalleryTwo(item) {
-
-                var id_app = $(item.find("input:hidden")[0]).val();
-                var descricao = $(item.find("input:hidden")[1]).val();
-                var packageName = $(item.find("input:hidden")[2]).val();
-                var dataCoverLarge = $(item.find("input:hidden")[3]).val();
-                var dataCoverSmall = $(item.find("input:hidden")[4]).val();
-                var incluir = 'S';
-                
-                $.ajax({
-                url: '@Url.Action("sendApps", "Home")',
-                type: 'POST',
-                dataType: 'json',
-                async: true,
-                    data: {
-                        androidID: androidID,
-                        id_app: id_app,
-                        descricao: descricao,
-                        packageName: packageName,
-                        dataCoverLarge: dataCoverLarge,
-                        dataCoverSmall: dataCoverSmall,
-                        incluir: incluir
-                    },
-                    success: function (result) {
-                        $(item).fadeOut(function () {
-                            $(containerTwo).append(item);
-                        });
-
-                        $(item).fadeIn();
-                        $(item).removeClass("box_current");
-                       
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-
-
+                swal({
+                    title: 'Autorização',
+                    text: "Deseja bloquear ou desbloquear o aplicativo?",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Desbloquear',
+                    cancelButtonColor: '#FF0000',
+                    cancelButtonText: 'Bloquear',
+                    reverseButtons: false
+                }).then(function(result) {
+                    if (result.value) {
+                        autorizar = true;
+                        executarBloqueio();
+                    } else if (result.dismiss === 'cancel') {
+                        autorizar = false;
+                        executarBloqueio();
                     }
                 });
             }
 
             function acceptBoxIngalleryOne(item) {
 
-                var id_app = $(item.find("input:hidden")[0]).val();
-                var descricao = $(item.find("input:hidden")[1]).val();
-                var packageName = $(item.find("input:hidden")[2]).val();
-                var dataCoverLarge = $(item.find("input:hidden")[3]).val();
-                var dataCoverSmall = $(item.find("input:hidden")[4]).val();
-                var incluir = 'N';
-                
+               var el = JSON.parse($(item).data('full'));
+
                 $.ajax({
-                url: '@Url.Action("sendApps", "Home")',
-                type: 'POST',
-                dataType: 'json',
-                async: true,
+                    url: '@Url.Action("sendApps", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
                     data: {
                         androidID: androidID,
-                        id_app: id_app,
-                        descricao: descricao,
-                        packageName: packageName,
-                        dataCoverLarge: dataCoverLarge,
-                        dataCoverSmall: dataCoverSmall,
-                        incluir: incluir
+                        id_app: el.Id,
+                        descricao: el.Descricao,
+                        packageName: el.PackageName,
+                        dataCoverLarge: el.dataCoverLarge,
+                        dataCoverSmall: el.dataCoverSmall,
+                        incluir: false,
+                        autorizar: false
                     },
-                    success: function (result) {
-                        $(item).fadeOut(function () {
+                    success: function(result) {
+                        $(item).fadeOut(function() {
                             $(containerOne).append(item);
                         });
 
                         $(item).fadeIn();
                         $(item).removeClass("box_current");
-                      
+
+                        $(item).css('box-shadow', '0 2px 4px rgba(0,0,0,0.1)');
+
                     },
-                    error: function (xhr, ajaxOptions, thrownError) {
+                    error: function(xhr, ajaxOptions, thrownError) {
 
 
                     }
@@ -620,15 +626,12 @@
             }
         }
 
-         
-
-        $('#btnLookupUser').click(function () {
+        $('#btnLookupUser').click(function() {
             loadApps();
         });
 
+        var carregaApps = function() {
 
-        var carregaApps = function () {
-            
             $.ajax({
                 url: '@Url.Action("getAcessos", "Home")',
                 type: 'POST',
@@ -637,15 +640,15 @@
                 data: {
                     androidID: androidID
                 },
-                success: function (result) {
+                success: function(result) {
                     var items = jQuery.parseJSON(result);
 
-                    $(function () {
+                    $(function() {
                         var itemTpl = $('#registrosAcesso').find('tr').first().clone();
                         $('#registrosAcesso').empty();
 
 
-                        $(items).each(function (index) {
+                        $(items).each(function(index) {
                             var _clone = itemTpl.clone();
                             $(_clone).find("#tdAcesso").html(this.Acesso);
                             $(_clone).find("#tdDescricao").html(this.Descricao);
@@ -689,14 +692,14 @@
 
 
                 },
-                error: function (xhr, ajaxOptions, thrownError) {
+                error: function(xhr, ajaxOptions, thrownError) {
 
 
                 }
             });
 
 
-            
+
             $.ajax({
                 url: '@Url.Action("getAppsList", "Home")',
                 type: 'POST',
@@ -705,40 +708,12 @@
                 data: {
                     androidID: androidID
                 },
-                success: function (result) {
-                    var items = jQuery.parseJSON(result);
+                success: function(result) {
+                    loadAppsInner(result);
 
-                    var arr = jQuery.grep(items, function (a) {
-                        return a.Autorizado != 'S';
-                    });
 
-                    var arr_autorizado = jQuery.grep(items, function (a) {
-                        return a.Autorizado == 'S';
-                    });
-
-                    $(function () {
-                        var itemTpl = $('script[data-template="listitem"]').text().split(/\$\{(.+?)\}/g);
-                        $('.list-items').empty();
-
-                        $('.list-items').append(arr.map(function (item) {
-                            return itemTpl.map(render(item)).join('');
-                        }));
-                    });
-
-                    $(function () {
-                        var itemTpl = $('script[data-template="listitemautorizado"]').text().split(/\$\{(.+?)\}/g);
-                        $('.list-items-autorizado').empty();
-
-                        $('.list-items-autorizado').append(arr_autorizado.map(function (item) {
-                            return itemTpl.map(render(item)).join('');
-                        }));
-                    });
-
-                    galleryDragAndDrop("#test-container", "#gallery-one", "#gallery-two", ".appContainer");
-
-                    
                 },
-                error: function (xhr, ajaxOptions, thrownError) {
+                error: function(xhr, ajaxOptions, thrownError) {
 
 
                 }
@@ -746,16 +721,15 @@
 
         };
 
-          jQuery.browser = {};
-            (function () {
-                jQuery.browser.msie = false;
-                jQuery.browser.version = 0;
-                if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
-                    jQuery.browser.msie = true;
-                    jQuery.browser.version = RegExp.$1;
-                }
-            })();
-
+        jQuery.browser = {};
+        (function() {
+            jQuery.browser.msie = false;
+            jQuery.browser.version = 0;
+            if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+                jQuery.browser.msie = true;
+                jQuery.browser.version = RegExp.$1;
+            }
+        })();
 
     </script>
 

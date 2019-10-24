@@ -28,9 +28,9 @@ namespace Unicell.Business
             return DAL.DALConnectionWEB.SendMobile(androidID, geoLocation, androidStatus, nomeFuncionario, UserID, Icon);
         }
 
-        public static bool SendACessoMobile(string androidID, Nullable<int> id_app, string packageName, string descricao, string dataCoverSmall, string dataCoverLarge, char incluir)
+        public static bool SendACessoMobile(string androidID, Nullable<int> id_app, string packageName, string descricao, string dataCoverSmall, string dataCoverLarge, bool incluir, bool autorizar)
         {
-            return DAL.DALConnectionWEB.SendACessoMobile(androidID, id_app, packageName, descricao, dataCoverSmall, dataCoverLarge, incluir);
+            return DAL.DALConnectionWEB.SendACessoMobile(androidID, id_app, packageName, descricao, dataCoverSmall, dataCoverLarge, incluir, autorizar);
         }
 
         public static void SetIcon(string icon, string androidId)

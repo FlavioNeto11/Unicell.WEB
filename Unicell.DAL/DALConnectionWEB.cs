@@ -76,7 +76,7 @@ namespace Unicell.DAL
             return true;
         }
 
-        public static bool SendACessoMobile(string androidID, Nullable<int> id_app, string packageName, string descricao, string dataCoverSmall, string dataCoverLarge, char incluir)
+        public static bool SendACessoMobile(string androidID, Nullable<int> id_app, string packageName, string descricao, string dataCoverSmall, string dataCoverLarge, bool incluir, bool autorizar)
         {
             try
             {
@@ -88,7 +88,8 @@ namespace Unicell.DAL
                     @DESCRICAO = descricao,
                     @DATA_COVER_SMALL = dataCoverSmall,
                     @DATA_COVER_LARGE = dataCoverLarge,
-                    @INCLUIR = incluir == 'S'
+                    @INCLUIR = incluir,
+                    @AUTORIZAR = autorizar
                 }, commandType: CommandType.StoredProcedure);
             }
             catch (Exception ex)
@@ -192,7 +193,7 @@ namespace Unicell.DAL
         public static List<AppMetadataDTO> getApps(List<string> packageNames, string androidId)
         {
             return Utils.DapperConnection.Query(" SELECT A.ID, A.PACKAGE_NAME, A.DESCRICAO, A.DATA_COVER_SMALL, A.DATA_COVER_LARGE, " +
-                                                            " CASE WHEN AP.ID_APP IS NULL THEN('N') ELSE 'S' END AS AUTORIZADO " +
+                                                            " AP.AUTORIZADO " +
                                                             " FROM APP A " +
                                                             " LEFT JOIN APP_AUTORIZADO AP ON A.ID = AP.ID_APP AND AP.ID_MOBILE = @ANDROID_ID " +
                                                             " WHERE AP.ID_APP IS NOT NULL OR(AP.ID_APP IS NULL AND A.PACKAGE_NAME IN(@PACKAGE_NAME))", 
