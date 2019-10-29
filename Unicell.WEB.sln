@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.136
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unicell.WEB", "Unicell.WEB\Unicell.WEB.csproj", "{F9E332CE-BDBD-43AE-90EB-3FB11739CF91}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unicell.DAL", "Unicell.DAL\Unicell.DAL.csproj", "{21DF30C1-13A4-4A04-9057-584FB61D99CC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unicell.Business", "Unicell.Business\Unicell.Business.csproj", "{CD7D5843-78A3-4C5F-A9DD-104F29F4152B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unicell.ViaCEP", "Unicell.ViaCEP\Unicell.ViaCEP.csproj", "{DAC91E5D-BAB9-45F2-BFA4-81D5D33151BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{CD7D5843-78A3-4C5F-A9DD-104F29F4152B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD7D5843-78A3-4C5F-A9DD-104F29F4152B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD7D5843-78A3-4C5F-A9DD-104F29F4152B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAC91E5D-BAB9-45F2-BFA4-81D5D33151BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAC91E5D-BAB9-45F2-BFA4-81D5D33151BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAC91E5D-BAB9-45F2-BFA4-81D5D33151BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAC91E5D-BAB9-45F2-BFA4-81D5D33151BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
