@@ -242,7 +242,7 @@ jQuery(document).ready(function () {
         $('#messageText').keydown(function (e) {
             if (e.keyCode === 13) {
 
-                chat.server.sendMessage($('#messageText').val(), selectedANDROID_ID);
+                chat.server.sendMessage($('#messageText').val(), selectedANDROID_ID, displayname);
 
                 $('#mensagens').append(templateMensagem.replace('{mensagem}', $('#messageText').val()));
                 // Clear text box and reset focus for next comment.

@@ -17,14 +17,14 @@ namespace Unicell.WEB
             Clients.All.hello();
         }
 
-        public void SendMessage(string message, string userName)
+        public void SendMessage(string message, string toName, string fromName)
         //I have defined 2 parameters. These are the parameters to be sent here from the client software
         {
             //var sender_connectionID = Context.ConnectionId;
-            Users user = users.Where(x => x.username.Equals(userName)).FirstOrDefault();
+            Users user = users.Where(x => x.username.Equals(toName)).FirstOrDefault();
             if (user != null)
             {
-                Clients.Client(user.connectionID).SendMessage(message, user.username);
+                Clients.Client(user.connectionID).SendMessage(message, fromName);
             }
         }
 
