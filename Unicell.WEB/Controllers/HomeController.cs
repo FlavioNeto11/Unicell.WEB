@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Net;
 using System.IO;
 using RestSharp;
+using Unicell.ViaCep.Modelos;
+using Unicell.ViaCep;
 
 namespace Unicell.WEB.Controllers
 {
@@ -164,6 +166,20 @@ namespace Unicell.WEB.Controllers
         public JsonResult sendApps(string androidID, Nullable<int> id_app, string packageName, string descricao, string dataCoverSmall, string dataCoverLarge, bool incluir, bool autorizar)
         {
             return Json(JsonConvert.SerializeObject(Business.WebBLL.SendACessoMobile(androidID, (id_app == 0) ? null : id_app, packageName, descricao, dataCoverSmall, dataCoverLarge, incluir, autorizar)));
+        }
+
+        private IViaCepService _viaCepService;
+
+        [HttpPost]
+        [HandleErrorWithAjaxFilter]
+        [Route("getEndereco")]
+        public JsonResult getEndereco(string CEP, EnderecoRequisicao? _enderecoRequisicao)
+        {
+            var enderecos = (_enderecoRequisicao.HasValue) ? 
+                _viaCepService.ObterEnderecosAsync(_enderecoRequisicao.Value).Result :
+                new List<Endereco>() { _viaCepService.ObterEnderecoAsync(CEP).Result };
+
+            return Json(JsonConvert.SerializeObject(enderecos));
         }
 
         [HttpPost]

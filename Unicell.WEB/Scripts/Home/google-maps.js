@@ -106,7 +106,8 @@ var _GoogleMaps = function () {
 
                             google.maps.event.clearInstanceListeners(marker);
 
-                            google.maps.event.addListener(marker, 'click', function () {
+                            google.maps.event.addListener(marker, 'click', function (e) {
+                                selectedANDROID_ID = marker.details.androidID;
                                 infowindow.open(map, marker);
                             });
 
@@ -215,17 +216,16 @@ jQuery(document).ready(function () {
 
     // Create a function that the hub can call back to display messages.
     chat.client.sendMessage = function (message, name) {
-        // Add the message to the page.
-        if (name !== displayname)
-            $('#mensagens').append(templateMensagemTerceiro.replace('{remetente}', name).replace('{mensagem}', message));
-        else
-            $('#mensagens').append(templateMensagem.replace('{mensagem}', message));
+        
+         $('#mensagens').append(templateMensagemTerceiro.replace('{remetente}', name).replace('{mensagem}', message));
+      
+           
     };
 
     // Set initial focus to message input box.
     $('#messageText').focus();
 
-    $.connection.hub.qs = { 'username': displayname };
+    $.connection.hub.qs = { 'servidor': '1' };
 
     var refreshUsuarios = function () {
         chat.server.getUsers().done(function (connections) {
@@ -243,8 +243,12 @@ jQuery(document).ready(function () {
             if (e.keyCode === 13) {
 
                 chat.server.sendMessage($('#messageText').val(), selectedANDROID_ID);
+
+                $('#mensagens').append(templateMensagem.replace('{mensagem}', $('#messageText').val()));
                 // Clear text box and reset focus for next comment.
                 $('#messageText').val('').focus();
+
+              
 
             }
         });

@@ -161,6 +161,7 @@
     <Compile Include="Utils\HandleErrorWithAjaxFilter.cs" />
     <Compile Include="Utils\UsuarioLogado.cs" />
     <Compile Include="Utils\Utility.cs" />
+    <Compile Include="Utils\ViaCep.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -1745,6 +1746,10 @@
     <ProjectReference Include="..\Unicell.DTO\Unicell.DTO.csproj">
       <Project>{9592059d-9e7a-454a-9588-c5c0bdc22cc6}</Project>
       <Name>Unicell.DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Unicell.ViaCEP\Unicell.ViaCEP.csproj">
+      <Project>{dac91e5d-bab9-45f2-bfa4-81d5d33151bb}</Project>
+      <Name>Unicell.ViaCEP</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
