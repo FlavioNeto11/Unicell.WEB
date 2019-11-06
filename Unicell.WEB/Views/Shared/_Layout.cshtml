@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-
+@using Mirante.Util;
 <!--
 Template Name: Unicell - Responsive Admin Dashboard Template build with Twitter Bootstrap 4
 Author: KeenThemes
@@ -129,7 +129,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click" m-menu-link-redirect="1" aria-haspopup="true">
                                     <a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link">
                                         <i class="m-menu__link-icon flaticon-add"></i>
-                                        <span class="m-menu__link-text">Actions</span>
+                                        <span class="m-menu__link-text">Ações</span>
                                         <i class="m-menu__hor-arrow la la-angle-down"></i>
                                         <i class="m-menu__ver-arrow la la-angle-right"></i>
                                     </a>
@@ -248,7 +248,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click" m-menu-link-redirect="1" aria-haspopup="true">
                                     <a href="javascript:;" class="m-menu__link m-menu__toggle" title="Non functional dummy link">
                                         <i class="m-menu__link-icon flaticon-line-graph"></i>
-                                        <span class="m-menu__link-text">Reports</span>
+                                        <span class="m-menu__link-text">Relatórios</span>
                                         <i class="m-menu__hor-arrow la la-angle-down"></i>
                                         <i class="m-menu__ver-arrow la la-angle-right"></i>
                                     </a>
@@ -453,9 +453,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <i class="m-menu__link-icon flaticon-paper-plane"></i>
                                         <span class="m-menu__link-title">
                                             <span class="m-menu__link-wrap">
-                                                <span class="m-menu__link-text">Apps</span>
+                                                <span class="m-menu__link-text">Aplicativos</span>
                                                 <span class="m-menu__link-badge">
-                                                    <span class="m-badge m-badge--brand m-badge--wide">new</span>
+                                                    <span class="m-badge m-badge--brand m-badge--wide">novo</span>
                                                 </span>
                                             </span>
                                         </span>
@@ -1070,20 +1070,19 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="m-stack m-stack--flex-tablet-and-mobile m-stack--ver m-stack--desktop">
                     <div class="m-stack__item m-stack__item--left m-stack__item--middle m-stack__item--last">
                         <span class="m-footer__copyright">
-                            2017 &copy; Unicell theme by
-                            <a href="https://keenthemes.com" class="m-link">Keenthemes</a>
+                            2019 &copy; Unicell 
                         </span>
                     </div>
                     <div class="m-stack__item m-stack__item--right m-stack__item--middle m-stack__item--first">
                         <ul class="m-footer__nav m-nav m-nav--inline m--pull-right">
                             <li class="m-nav__item">
                                 <a href="#" class="m-nav__link">
-                                    <span class="m-nav__link-text">About</span>
+                                    <span class="m-nav__link-text">Sobre</span>
                                 </a>
                             </li>
                             <li class="m-nav__item">
                                 <a href="#" class="m-nav__link">
-                                    <span class="m-nav__link-text">Privacy</span>
+                                    <span class="m-nav__link-text">Mapa do Site</span>
                                 </a>
                             </li>
                             <li class="m-nav__item">
@@ -1093,7 +1092,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </li>
                             <li class="m-nav__item">
                                 <a href="#" class="m-nav__link">
-                                    <span class="m-nav__link-text">Purchase</span>
+                                    <span class="m-nav__link-text">Compra</span>
                                 </a>
                             </li>
                             <li class="m-nav__item m-nav__item">
@@ -1441,12 +1440,100 @@ License: You must have a valid license purchased only from themeforest(the above
             </a>
         </li>
     </ul>
-
+    <script type="text/javascript">
+        var selectedANDROID_ID;
+        var displayname = '@UsuarioLogado.Usuario.ID_Empresa';
+    </script>
     <!--end::Page Snippets -->
-   
+
+
+
     @RenderSection("scripts", required: false)
 
+    <!--end::Page Vendors Scripts -->
+    <!--begin::Page Resources -->
+    <!--Reference the SignalR library. -->
+    <script src="~/Scripts/jquery.signalR-2.2.3.min.js"></script>
+    <!--Reference the autogenerated SignalR hub script. -->
+    <script src="~/signalr/hubs"></script>
+    <!--SignalR script to update the chat page and send messages.-->
 
+    <script type="text/javascript">
+        let templateMensagemTerceiro = '<div class="m-messenger__wrapper"> ' +
+            '    <div class="m-messenger__message m-messenger__message--in">' +
+            '        <div class="m-messenger__message-pic">' +
+            '            <img src="../dist/default/assets/app/media/img//users/user3.jpg" alt="" />' +
+            '        </div>' +
+            '        <div class="m-messenger__message-body">' +
+            '            <div class="m-messenger__message-arrow"></div>' +
+            '            <div class="m-messenger__message-content">' +
+            '                <div class="m-messenger__message-username">' +
+            '                    {remetente} wrote' +
+            '                </div>' +
+            '                <div class="m-messenger__message-text">' +
+            '                    {mensagem} ' +
+            '                </div>' +
+            '            </div>' +
+            '        </div>' +
+            '    </div>' +
+            '</div>';
+
+        let templateMensagem = ' <div class="m-messenger__wrapper">' +
+            '    <div class="m-messenger__message m-messenger__message--out">' +
+            '        <div class="m-messenger__message-body">' +
+            '            <div class="m-messenger__message-arrow"></div>' +
+            '            <div class="m-messenger__message-content">' +
+            '                <div class="m-messenger__message-text">' +
+            '                    {mensagem} ' +
+            '                </div>' +
+            '            </div>' +
+            '        </div>' +
+            '    </div>' +
+            '</div>';
+
+        // Reference the auto-generated proxy for the hub.
+        var chat = $.connection.chatHub;
+
+        // Create a function that the hub can call back to display messages.
+        chat.client.sendMessage = function (message, name) {
+
+            $('#mensagens').append(templateMensagemTerceiro.replace('{remetente}', name).replace('{mensagem}', message));
+
+
+        };
+
+        // Set initial focus to message input box.
+        $('#messageText').focus();
+
+        $.connection.hub.qs = { 'servidor': '1' };
+
+        var refreshUsuarios = function () {
+            chat.server.getUsers().done(function (connections) {
+                usuarios = connections;
+
+                refreshUsuarios();
+            });
+        };
+
+        // Start the connection.
+        $.connection.hub.start().done(function () {
+            refreshUsuarios();
+
+            $('#messageText').keydown(function (e) {
+                if (e.keyCode === 13) {
+
+                    chat.server.sendMessage($('#messageText').val(), selectedANDROID_ID, displayname);
+
+                    $('#mensagens').append(templateMensagem.replace('{mensagem}', $('#messageText').val()));
+                    // Clear text box and reset focus for next comment.
+                    $('#messageText').val('').focus();
+
+
+
+                }
+            });
+        });
+    </script>
 
 
 </body>

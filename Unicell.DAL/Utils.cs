@@ -21,7 +21,7 @@ namespace Unicell.DAL
         /// <param name="pattern">String de filtro para retornar itens DOM que contém as informações há serem retornadas.</param>
         /// <param name="url">Link dá pagina a ser mapeada os aplicativos.</param>
         /// <returns>Lista de aplicativos contendo Nome, PackageName e imagens de preview.</returns>
-        public static List<AppMetadataDTO> getAppListByRegex(string name, string pattern, string url, bool primeiro = false, string packageName = "")
+        public static List<AcessoDTO.Result> getAppListByRegex(string name, string pattern, string url, bool primeiro = false, string packageName = "")
         {
             var html = getResponseFromServerAsync(url + name);
             MatchCollection b = new Regex(pattern).Matches(html);
@@ -30,12 +30,12 @@ namespace Unicell.DAL
             var retorno = (b.Count > 5) ? b.Cast<Match>()
                 .Select((x, i) => new { index = i / 6, value = x }).Where(x => (primeiro) ? x.index == 0 : true)
                 .GroupBy(x => x.index)
-                .Select(x => new AppMetadataDTO() {
-                    Descricao = GetVal(x.ToList()[5].value.Value, "title"),
-                    PackageName = GetVal(x.ToList()[4].value.Value, "href").Split('=').Last(),
-                    dataCoverLarge = GetVal(x.ToList()[2].value.Value, "data-srcset").Split(' ').First(),
-                    dataCoverSmall = GetVal(x.ToList()[2].value.Value, "data-src") })
-                .ToList() : new List<AppMetadataDTO>();
+                .Select(x => new AcessoDTO.Result() {
+                    DESCRICAO = GetVal(x.ToList()[5].value.Value, "title"),
+                    PACKAGE_NAME = GetVal(x.ToList()[4].value.Value, "href").Split('=').Last(),
+                    DATA_COVER_LARGE = GetVal(x.ToList()[2].value.Value, "data-srcset").Split(' ').First(),
+                    DATA_COVER_SMALL = GetVal(x.ToList()[2].value.Value, "data-src") })
+                .ToList() : new List<AcessoDTO.Result>();
 
             return retorno;
         }

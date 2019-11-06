@@ -168,6 +168,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\dataTables\datatables.min.css" />
+    <Content Include="Content\dataTables\dataTables.responsive.css" />
     <Content Include="dist\default\assets\app\js\dashboard.js" />
     <Content Include="dist\default\assets\app\js\layout-builder.js" />
     <Content Include="dist\default\assets\app\js\my-script.js" />
@@ -239,6 +241,7 @@
     <Content Include="dist\default\assets\app\media\img\logos\logo_client_white.png" />
     <Content Include="dist\default\assets\app\media\img\logos\logo_invoice_dark.png" />
     <Content Include="dist\default\assets\app\media\img\logos\logo_invoice_white.png" />
+    <Content Include="dist\default\assets\app\media\img\logos\unicell.png" />
     <Content Include="dist\default\assets\app\media\img\misc\notification_bg.jpg" />
     <Content Include="dist\default\assets\app\media\img\misc\quick_actions_bg.jpg" />
     <Content Include="dist\default\assets\app\media\img\misc\user_profile_bg.jpg" />
@@ -416,9 +419,12 @@
     <Content Include="dist\default\assets\vendors\base\vendors.bundle.css" />
     <Content Include="dist\default\assets\vendors\base\vendors.bundle.js" />
     <Content Include="dist\default\assets\vendors\base\vendors.bundle.rtl.css" />
+    <Content Include="dist\default\assets\vendors\custom\datatables\dataTables.bootstrap4.min.js" />
     <Content Include="dist\default\assets\vendors\custom\datatables\datatables.bundle.css" />
     <Content Include="dist\default\assets\vendors\custom\datatables\datatables.bundle.js" />
     <Content Include="dist\default\assets\vendors\custom\datatables\datatables.bundle.rtl.css" />
+    <Content Include="dist\default\assets\vendors\custom\datatables\datatables.min.js" />
+    <Content Include="dist\default\assets\vendors\custom\datatables\dataTables.responsive.js" />
     <Content Include="dist\default\assets\vendors\custom\flot\flot.bundle.js" />
     <Content Include="dist\default\assets\vendors\custom\fullcalendar\fullcalendar.bundle.css" />
     <Content Include="dist\default\assets\vendors\custom\fullcalendar\fullcalendar.bundle.js" />

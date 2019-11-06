@@ -33,6 +33,7 @@ namespace Unicell.WEB.Controllers
 
         public ActionResult ConfigurarDispositivos()
         {
+            ViewBag.ID_Empresa = UsuarioLogado.Usuario.ID_Empresa;
             return View();
         }
 
@@ -131,7 +132,13 @@ namespace Unicell.WEB.Controllers
             {
                 List<AppMetadataDTO> retorno = Business.WebBLL.getAppListByRegex(nomeAplicativo,
                 "<div class=\"[^\\\"]*\" title=\"[^\\\"]*\"|<a href=\"/store/apps/details?.[^\\\"]*\" aria-hidden=\"[^\\\"]*\" tabindex=\"[^\\\"]*\" class=\"[^\\\"]*\"></a>|<img.+?\"https://lh3.googleusercontent.com.+?>",
-                "https://play.google.com/store/search?c=apps&q=");
+                "https://play.google.com/store/search?c=apps&q=").Select(x => new AppMetadataDTO() {
+                    Acesso = x.ACESSO.ToString(),
+                    dataCoverLarge = x.DATA_COVER_LARGE,
+                    dataCoverSmall = x.DATA_COVER_SMALL,
+                    Descricao = x.DESCRICAO,
+                    PackageName = x.PACKAGE_NAME
+                }).ToList();
 
                 List<AppMetadataDTO> retornoDB = Business.WebBLL.getApps(retorno.Select(x => x.PackageName).ToList(), androidID);
                
@@ -152,11 +159,14 @@ namespace Unicell.WEB.Controllers
 
         [HttpPost]
         [HandleErrorWithAjaxFilter]
-        [Route("getAcessos")]
-        public JsonResult getAcessos(string androidID)
+        [Route("GetAcessos")]
+        public JsonResult GetAcessos(string androidID, int? draw, int? start, int? length, string search)
         {
-            var retorno = Business.WebBLL.getAcessos(androidID);
-            return Json(JsonConvert.SerializeObject(retorno));
+            int? page = (start.HasValue ? start.Value / length : 0) + 1;
+            var retorno = Business.WebBLL.GetAcessos(androidID, length ?? 5, page.Value, search);
+            retorno.draw = draw;
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+
         }
 
 

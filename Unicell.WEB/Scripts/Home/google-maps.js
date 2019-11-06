@@ -1,6 +1,6 @@
 //== Class definition
 
-var selectedANDROID_ID;
+
 var usuarios;
 var markers = [];
 var firstTime = true;
@@ -108,6 +108,7 @@ var _GoogleMaps = function () {
 
                             google.maps.event.addListener(marker, 'click', function (e) {
                                 selectedANDROID_ID = marker.details.androidID;
+                                $('#m_quick_sidebar_toggle').click();
                                 infowindow.open(map, marker);
                             });
 
@@ -178,82 +179,6 @@ return {
 
 jQuery(document).ready(function () {
     _GoogleMaps.init();
-
-    let templateMensagemTerceiro = '<div class="m-messenger__wrapper"> ' +
-        '    <div class="m-messenger__message m-messenger__message--in">' +
-        '        <div class="m-messenger__message-pic">' +
-        '            <img src="../dist/default/assets/app/media/img//users/user3.jpg" alt="" />' +
-        '        </div>' +
-        '        <div class="m-messenger__message-body">' +
-        '            <div class="m-messenger__message-arrow"></div>' +
-        '            <div class="m-messenger__message-content">' +
-        '                <div class="m-messenger__message-username">' +
-        '                    {remetente} wrote' +
-        '                </div>' +
-        '                <div class="m-messenger__message-text">' +
-        '                    {mensagem} ' +
-        '                </div>' +
-        '            </div>' +
-        '        </div>' +
-        '    </div>' +
-        '</div>';
-
-    let templateMensagem = ' <div class="m-messenger__wrapper">' +
-        '    <div class="m-messenger__message m-messenger__message--out">' +
-        '        <div class="m-messenger__message-body">' +
-        '            <div class="m-messenger__message-arrow"></div>' +
-        '            <div class="m-messenger__message-content">' +
-        '                <div class="m-messenger__message-text">' +
-        '                    {mensagem} ' +
-        '                </div>' +
-        '            </div>' +
-        '        </div>' +
-        '    </div>' +
-        '</div>';
-
-    // Reference the auto-generated proxy for the hub.
-    var chat = $.connection.chatHub;
-
-    // Create a function that the hub can call back to display messages.
-    chat.client.sendMessage = function (message, name) {
-        
-         $('#mensagens').append(templateMensagemTerceiro.replace('{remetente}', name).replace('{mensagem}', message));
-      
-           
-    };
-
-    // Set initial focus to message input box.
-    $('#messageText').focus();
-
-    $.connection.hub.qs = { 'servidor': '1' };
-
-    var refreshUsuarios = function () {
-        chat.server.getUsers().done(function (connections) {
-            usuarios = connections;
-
-            refreshUsuarios();
-        });
-    };
-
-    // Start the connection.
-    $.connection.hub.start().done(function () {
-        refreshUsuarios();
-
-        $('#messageText').keydown(function (e) {
-            if (e.keyCode === 13) {
-
-                chat.server.sendMessage($('#messageText').val(), selectedANDROID_ID, displayname);
-
-                $('#mensagens').append(templateMensagem.replace('{mensagem}', $('#messageText').val()));
-                // Clear text box and reset focus for next comment.
-                $('#messageText').val('').focus();
-
-              
-
-            }
-        });
-    });
-
 });
 
 

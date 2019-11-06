@@ -25,6 +25,14 @@ namespace Unicell.WEB
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/plugins/dataTables").Include(
+           "~/dist/default/assets/vendors/custom/datatables/datatables.min.js",
+           "~/dist/default/assets/vendors/custom/datatables/dataTables.bootstrap4.min.js",
+           "~/dist/default/assets/vendors/custom/datatables/dataTables.responsive.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/configurarDispositivos").Include(
+                      "~/Scripts/Home/configurarDispositivos.js"));
         }
     }
 }

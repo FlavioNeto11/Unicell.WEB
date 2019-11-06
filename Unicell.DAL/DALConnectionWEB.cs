@@ -109,24 +109,48 @@ namespace Unicell.DAL
             });
         }
 
-        public static List<AppMetadataDTO> getAcessos(string androidId)
+        public static AcessoDTO GetAcessos(string ANDROID_ID, int? QtdPorPagina, int? Pagina, string search)
         {
-            var query = Utils.DapperConnection.Query("SELECT AC.PACKAGE_NAME, AC.ACESSO, A.DATA_COVER_SMALL, A.DATA_COVER_LARGE, A.DESCRICAO FROM APP_ACESSO AC "
-                                                     + "   LEFT JOIN  APP A ON A.PACKAGE_NAME = AC.PACKAGE_NAME"
-                                                     + "   WHERE AC.ANDROID_ID = @ANDROID_ID", new { ANDROID_ID = androidId });
+            var query = Utils.DapperConnection.QueryMultiple("GET_ACESSOS", new
+            {
+                ANDROID_ID = ANDROID_ID,
+                QtdPorPagina = QtdPorPagina,
+                Pagina = Pagina,
+                search = search,
+            }, commandType: CommandType.StoredProcedure);
+            /*
+            var data = query.Read<AcessoDTO.Result>().ToList();
 
-            var packages = query.Where(item => item.DATA_COVER_SMALL == null || item.DATA_COVER_LARGE == null).Select(item => item.PACKAGE_NAME).Distinct();
+            var packages = data.Where(item => item.DATA_COVER_SMALL == null || item.DATA_COVER_LARGE == null).Select(item => item.PACKAGE_NAME).Distinct();
 
-            var itens = packages.SelectMany(item => (List<AppMetadataDTO>)(Utils.getAppListByRegex(item.ToString(),
+            var itens = packages.SelectMany(item => (List<AcessoDTO.Result>)(Utils.getAppListByRegex(item.ToString(),
                                    "<img.+?src=[\"'](.+?)[\"'].+?>|<span class=\"preview-overlay-container\" data-docid=[\"'](.+?)[\"'].+?>",
                                    "https://play.google.com/store/search?c=apps&q=", true, item.ToString())));
-            
-            return query.Select(meta => { return (meta.DATA_COVER_SMALL == null || meta.DATA_COVER_LARGE == null) ?
-                    itens.Where(item => item.PackageName == meta.PACKAGE_NAME.ToString()).Select(item => { item.Acesso = meta.ACESSO.ToString(); return item; }).First() :
-                 new AppMetadataDTO()  { Acesso = meta.ACESSO.ToString(), dataCoverLarge = meta.DATA_COVER_LARGE, dataCoverSmall = meta.DATA_COVER_SMALL, Descricao = meta.DESCRICAO, PackageName = meta.PACKAGE_NAME
-                };
-            }).ToList();
-         
+
+            return new AcessoDTO()
+            {
+                data = data.Select(meta =>
+                {
+                    return (meta.DATA_COVER_SMALL == null || meta.DATA_COVER_LARGE == null) ?
+                            itens.Where(item => item.PACKAGE_NAME == meta.PACKAGE_NAME.ToString()).Select(item => { item.ACESSO = meta.ACESSO; return item; }).FirstOrDefault() :
+                            new AcessoDTO.Result() {
+                                ACESSO = meta.ACESSO,
+                                DATA_COVER_LARGE = meta.DATA_COVER_LARGE,
+                                DATA_COVER_SMALL = meta.DATA_COVER_SMALL,
+                                DESCRICAO = meta.DESCRICAO,
+                                PACKAGE_NAME = meta.PACKAGE_NAME
+                            };
+                }).ToList(),
+                sucesso = query.ReadSingle<SucessoDTO>()
+            };
+            */
+
+
+            return new AcessoDTO()
+            {
+                data = query.Read<AcessoDTO.Result>().ToList(),
+                sucesso = query.ReadSingle<SucessoDTO>()
+            };
         }
 
         public static List<string> SendSMS()
@@ -192,24 +216,27 @@ namespace Unicell.DAL
 
         public static List<AppMetadataDTO> getApps(List<string> packageNames, string androidId)
         {
-            return Utils.DapperConnection.Query(" SELECT A.ID, A.PACKAGE_NAME, A.DESCRICAO, A.DATA_COVER_SMALL, A.DATA_COVER_LARGE, " +
+            var retorno = Utils.DapperConnection.Query(" SELECT A.ID, A.PACKAGE_NAME, A.DESCRICAO, A.DATA_COVER_SMALL, A.DATA_COVER_LARGE, " +
                                                             " AP.AUTORIZADO " +
                                                             " FROM APP A " +
                                                             " LEFT JOIN APP_AUTORIZADO AP ON A.ID = AP.ID_APP AND AP.ID_MOBILE = @ANDROID_ID " +
-                                                            " WHERE AP.ID_APP IS NOT NULL OR(AP.ID_APP IS NULL AND A.PACKAGE_NAME IN(@PACKAGE_NAME))", 
-                                                            new {
+                                                            " WHERE AP.ID_APP IS NOT NULL OR(AP.ID_APP IS NULL AND A.PACKAGE_NAME IN(@PACKAGE_NAME))",
+                                                            new
+                                                            {
                                                                 PACKAGE_NAME = string.Join(",", packageNames),
                                                                 ANDROID_ID = androidId
                                                             }).Select(
             item => new AppMetadataDTO()
             {
                 Id = item.ID,
-                PackageName =item.PACKAGE_NAME,
+                PackageName = item.PACKAGE_NAME,
                 Descricao = item.DESCRICAO,
                 dataCoverSmall = item.DATA_COVER_SMALL,
                 dataCoverLarge = item.DATA_COVER_LARGE,
                 Autorizado = item.AUTORIZADO
             }).ToList();
+
+            return retorno;
         }
 
         public static CargoDTO GetCargo(int? ID_EMPRESA, int? QtdPorPagina, int? Pagina, string search)

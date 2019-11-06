@@ -43,10 +43,7 @@ namespace Unicell.API.Controllers
             DALConnectionWEB.SetIcon(icon, androidId);
         }
         
-        public List<AppMetadataDTO> getAcessos([FromBody] string androidId)
-        {
-            return DALConnectionWEB.getAcessos(androidId);
-        }
+      
 
         public List<AppMetadataDTO> getApps([FromBody] List<string> packageNames, [FromBody] string androidId)
         {
@@ -74,22 +71,7 @@ namespace Unicell.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Carrega lista de aplicativos da PlayStore
-        /// </summary>
-        /// <param name="name">Nome do aplicativo</param>
-        /// <returns>Lista de aplicativos contendo Nome, PackageName e imagens de preview.</returns>
-        [HttpPost]
-        [Route("getAppList")]
-        public List<AppMetadataDTO> getAppList([FromBody]getAppModel model)
-        {
-            List<AppMetadataDTO> retorno = Utils.getAppListByRegex(model.name,
-                "<div class=\"[^\\\"]*\" title=\"[^\\\"]*\"|<a href=\"/store/apps/details?.[^\\\"]*\" aria-hidden=\"[^\\\"]*\" tabindex=\"[^\\\"]*\" class=\"[^\\\"]*\"></a>|<img.+?\"https://lh3.googleusercontent.com.+?>",
-                "https://play.google.com/store/search?c=apps&q=");
-
-            //List<AppMetadataDTO> retornoDB = getApps(retorno.Select(x => x.PackageName).ToList(), model.androidId);
-            return retorno;
-        }
+       
 
         [HttpGet]
         [Route("SendSMS")]

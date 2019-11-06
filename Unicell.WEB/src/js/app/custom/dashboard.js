@@ -10,7 +10,7 @@ var Dashboard = function() {
         var config = {
             type: 'line',
             data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October"],
+                labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"],
                 datasets: [{
                     label: "",
                     borderColor: color,
@@ -265,8 +265,8 @@ var Dashboard = function() {
         var config = {
             type: 'line',
             data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December",
-                    "January", "February", "March", "April"
+                labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro",
+                    "Janeiro", "Fevereiro", "Março", "Abril"
                 ],
                 datasets: [{
                     label: "Sales Stats",
@@ -371,7 +371,7 @@ var Dashboard = function() {
         var config = {
             type: 'line',
             data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October"],
+                labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"],
                 datasets: [{
                     label: "Sales Stats",
                     backgroundColor: mApp.getColor('danger'), // Put the gradient here as a fill color
@@ -459,10 +459,10 @@ var Dashboard = function() {
             type: 'line',
             data: {
                 labels: [
-                    "January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
-                    "January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
-                    "January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
-                    "January", "February", "March", "April"
+                    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro",
+                    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro",
+                    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro",
+                    "Janeiro", "Fevereiro", "Março", "Abril"
                 ],
                 datasets: [{
                     label: "Sales Stats",
@@ -559,10 +559,10 @@ var Dashboard = function() {
             type: 'line',
             data: {
                 labels: [
-                    "January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
-                    "January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
-                    "January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
-                    "January", "February", "March", "April"
+                    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro",
+                    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro",
+                    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro",
+                    "Janeiro", "Fevereiro", "Março", "Abril"
                 ],
                 datasets: [{
                     label: "Sales Stats",
@@ -822,7 +822,7 @@ var Dashboard = function() {
         var config = {
             type: 'line',
             data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October"],
+                labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"],
                 datasets: [{
                     label: "Sales Stats",
                     backgroundColor: gradient,
@@ -916,7 +916,7 @@ var Dashboard = function() {
         var config = {
             type: 'line',
             data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October"],
+                labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"],
                 datasets: [{
                     label: "Bandwidth Stats",
                     backgroundColor: gradient,
@@ -1010,7 +1010,7 @@ var Dashboard = function() {
         var config = {
             type: 'line',
             data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October"],
+                labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"],
                 datasets: [{
                     label: "Bandwidth Stats",
                     backgroundColor: gradient,
@@ -1104,7 +1104,7 @@ var Dashboard = function() {
         var config = {
             type: 'line',
             data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October"],
+                labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"],
                 datasets: [{
                     label: "AdWord Clicks",
                     backgroundColor: mApp.getColor('brand'),
@@ -1206,7 +1206,7 @@ var Dashboard = function() {
         var config = {
             type: 'line',
             data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October"],
+                labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro"],
                 datasets: [{
                     label: "AdWords Views",
 

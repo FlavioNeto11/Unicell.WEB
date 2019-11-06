@@ -8,7 +8,7 @@ namespace Unicell.API.Models
     public class SendAcessosModel
     {
         public string androidID { get; set; }
-        public List<Acesso> packages { get; set; }
+        public Acesso[] packages { get; set; }
 
         public class Acesso
         {

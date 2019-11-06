@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -10,14 +11,14 @@ namespace Unicell.DAL
 {
     public class DALConnectionMobile
     {
-        public static string[] SendAcessos(string androidID, List<SendAcessosModel.Acesso> packages)
+        public static string[] SendAcessos(string androidID, SendAcessosModel.Acesso[] packages)
         {
             return packages.Select(package => {
                 Utils.DapperConnection.Query("MANTER_ACESSO", new
                 {
                     ANDROID_ID = androidID,
                     PACKAGE_NAME = package.packageName,
-                    ACESSO = package.acesso
+                    ACESSO = DateTime.Parse(package.acesso)
                 }, commandType: CommandType.StoredProcedure);
 
                 return package.packageName;
