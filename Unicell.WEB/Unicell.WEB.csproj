@@ -170,6 +170,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\dataTables\datatables.min.css" />
     <Content Include="Content\dataTables\dataTables.responsive.css" />
+    <Content Include="Content\estilo.css" />
     <Content Include="dist\default\assets\app\js\dashboard.js" />
     <Content Include="dist\default\assets\app\js\layout-builder.js" />
     <Content Include="dist\default\assets\app\js\my-script.js" />
@@ -734,6 +735,29 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\cell-bloq.png" />
+    <Content Include="img\cell-popup.png" />
+    <Content Include="img\cell-reuni.png" />
+    <Content Include="img\home.jpg" />
+    <Content Include="img\home.png" />
+    <Content Include="img\imagens ara o site\cell-popup.png" />
+    <Content Include="img\imagens ara o site\cell-reuni.png" />
+    <Content Include="img\imagens ara o site\celular acesso bloqueado.png" />
+    <Content Include="img\imagens ara o site\home.jpg" />
+    <Content Include="img\imagens ara o site\Macbook cell 2.png" />
+    <Content Include="img\imagens ara o site\Macbook cell.png" />
+    <Content Include="img\imagens ara o site\mcbook cadastro.png" />
+    <Content Include="img\imagens ara o site\mcbook lista.png" />
+    <Content Include="img\imagens ara o site\mcbook mapa.png" />
+    <Content Include="img\imagens ara o site\setas-celular.png" />
+    <Content Include="img\logo.png" />
+    <Content Include="img\logo.svg" />
+    <Content Include="img\Macbook cell 2.png" />
+    <Content Include="img\Macbook cell.png" />
+    <Content Include="img\mcbook cadastro.png" />
+    <Content Include="img\mcbook lista.png" />
+    <Content Include="img\mcbook mapa.png" />
+    <Content Include="img\setas-celular.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="dist\default\assets\vendors\base\fonts\flaticon\Flaticon.eot" />
@@ -1726,6 +1750,7 @@
     <Content Include="Views\Home\ConfigurarFuncionarios.cshtml" />
     <Content Include="Views\Home\ConfigurarCargo.cshtml" />
     <Content Include="Views\Home\ConfigurarQRCode.cshtml" />
+    <Content Include="Views\Home\Institucional.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -53,6 +53,11 @@ namespace Unicell.WEB.Controllers
             return View();
         }
 
+        public ActionResult Institucional()
+        {
+            return View();
+        }
+
         [HttpPost]
         [HandleErrorWithAjaxFilter]
         [Route("GetMobile")]

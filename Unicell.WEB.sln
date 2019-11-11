@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unicell.DAL", "Unicell.DAL\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unicell.Business", "Unicell.Business\Unicell.Business.csproj", "{CD7D5843-78A3-4C5F-A9DD-104F29F4152B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unicell.ViaCEP", "Unicell.ViaCEP\Unicell.ViaCEP.csproj", "{DAC91E5D-BAB9-45F2-BFA4-81D5D33151BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unicell.ViaCEP", "Unicell.ViaCEP\Unicell.ViaCEP.csproj", "{DAC91E5D-BAB9-45F2-BFA4-81D5D33151BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
