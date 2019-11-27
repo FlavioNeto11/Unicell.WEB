@@ -1,15 +1,15 @@
-var element = "#table-dispositivos";
+Ôªøvar element = "#table-dispositivos";
 var elementAcesso = "#table-acessos";
 function carregaGrid() {
-    
+
     var table = $(element).DataTable({
         responsive: !0,
         searchDelay: 500,
         "language": {
             "lengthMenu": "Exibindo _MENU_ por pagina",
-            "zeroRecords": "N„o existem registros correspondentes ao filtro selecionado.",
+            "zeroRecords": "N√£o existem registros correspondentes ao filtro selecionado.",
             "info": "Exibindo _START_ a _END_ de _TOTAL_ registros",
-            "infoEmpty": "Essa consulta n„o retornou registros.",
+            "infoEmpty": "Essa consulta n√£o retornou registros.",
             "infoFiltered": "(filtrado de _MAX_ registros)",
             "paginate": {
                 "previous": "Anterior",
@@ -53,15 +53,15 @@ function carregaGrid() {
             dataType: "json"
         },
         "drawCallback": function (response) {
-              
-          
+
+
         },
         columns: [{
             data: "ANDROID_ID",
             title: "IMEI"
         }, {
             data: "NM_FUNCIONARIO",
-            title: "Funcionario"
+            title: "Funcion√°rio"
         }, {
             data: "ENDERECO",
             title: "Endereco"
@@ -73,25 +73,25 @@ function carregaGrid() {
             title: "Status"
         }, {
             "data": "ANDROID_ID", "title": "", "autowidth": true, "render": function (data, type, full, meta) {
-                return '<i onclick="abreChat('+data+')" data-id="' + data + '" class="fa flaticon-chat chat-grid"></i>';
+                return '<i onclick="abreChat(' + data + ')" data-id="' + data + '" class="fa flaticon-chat chat-grid"></i>';
             }
         }, {
             "data": "ANDROID_ID", "title": "", "autowidth": true, "render": function (data, type, full, meta) {
-                return '<i onclick="abreEdit(' + data +')" data-id="' + data + '" class="fa fa-pencil-alt edit-grid"></i>';
+                return '<i onclick="abreEdit(' + data + ')" data-id="' + data + '" class="fa fa-pencil-alt edit-grid"></i>';
             }
         }]
     });
 
-   
+
 
     var tableAcesso = $(elementAcesso).DataTable({
         responsive: !0,
         searchDelay: 500,
         "language": {
             "lengthMenu": "Exibindo _MENU_ por pagina",
-            "zeroRecords": "N„o existem registros correspondentes ao filtro selecionado.",
+            "zeroRecords": "N√£o existem registros correspondentes ao filtro selecionado.",
             "info": "Exibindo _START_ a _END_ de _TOTAL_ registros",
-            "infoEmpty": "Essa consulta n„o retornou registros.",
+            "infoEmpty": "Essa consulta n√£o retornou registros.",
             "infoFiltered": "(filtrado de _MAX_ registros)",
             "paginate": {
                 "previous": "Anterior",
@@ -136,23 +136,23 @@ function carregaGrid() {
             dataType: "json"
         },
         "drawCallback": function (response) {
-       
+
         },
 
         columns: [{
             data: "ACESSO_STRING",
             title: "Acesso"
         }, {
-                data: "DESCRICAO",
+            data: "DESCRICAO",
             title: "Descricao"
-            }, {
-                data: "PACKAGE_NAME",
-                title: "Package"
-            }, {
-                "data": "DATA_COVER_SMALL", "title": "", "autowidth": true, "render": function (data, type, full, meta) {
-                    return '<img style="width:36px;" src="' + ((data) ? data : "https://lh3.googleusercontent.com/v0Na9wm3dVQlJ6eiGchC8FoUVgnSY4ik0yOLZwyeX1iieMJ_byckvj9yEHp8IpVzCXty=s128-rw")+'" />';
-                }
-            }]
+        }, {
+            data: "PACKAGE_NAME",
+            title: "Package"
+        }, {
+            "data": "DATA_COVER_SMALL", "title": "", "autowidth": true, "render": function (data, type, full, meta) {
+                return '<img style="width:36px;" src="' + ((data) ? data : "https://lh3.googleusercontent.com/v0Na9wm3dVQlJ6eiGchC8FoUVgnSY4ik0yOLZwyeX1iieMJ_byckvj9yEHp8IpVzCXty=s128-rw") + '" />';
+            }
+        }]
     });
 }
 
@@ -176,13 +176,13 @@ $(document).ready(function () {
     carregaGrid();
 
 
-  
+
 
     $('#btnLookupUser').click(function () {
         loadApps();
     });
 
-   
+
 
     $('#btnCancelar').click(function () {
         $('#div-dispositivos').show();
@@ -324,7 +324,7 @@ function galleryDragAndDrop(mainContainer, containerOne, containerTwo, dragItem)
         };
 
         swal({
-            title: 'AutorizaÁ„o',
+            title: 'Autoriza√ß√£o',
             text: "Deseja bloquear ou desbloquear o aplicativo?",
             type: 'warning',
             showCancelButton: true,

@@ -1,4 +1,4 @@
-var selectedID = null;
+ï»¿var selectedID = null;
 
 var DatatablesDataSourceAjaxServer = {
     init: function () {
@@ -11,14 +11,14 @@ var DatatablesDataSourceAjaxServer = {
             processing: !0,
             serverSide: !0,
             "language": {
-                "lengthMenu": "Exibindo _MENU_ por página",
-                "zeroRecords": "Não existem registros correspondentes ao filtro selecionado.",
-                "info": "Exibindo página _PAGE_ de _PAGES_",
-                "infoEmpty": "Essa consulta não retornou registros.",
+                "lengthMenu": "Exibindo _MENU_ por pÃ¡gina",
+                "zeroRecords": "NÃ£o existem registros correspondentes ao filtro selecionado.",
+                "info": "Exibindo pÃ¡gina _PAGE_ de _PAGES_",
+                "infoEmpty": "Essa consulta nÃ£o retornou registros.",
                 "infoFiltered": "(filtrado de _MAX_ registros)",
                 "paginate": {
                     "previous": "Anterior",
-                    "next": "Próximo"
+                    "next": "PrÃ³ximo"
                 },
                 "search": "Filtrar:"
             },
@@ -32,8 +32,8 @@ var DatatablesDataSourceAjaxServer = {
                     $('#cmbCargo').val($(el).data('full').ID_CARGO);
                     $('#cpf').val($(el).data('full').CPF);
                     $('#rg').val($(el).data('full').RG);
-                    $('#cmbGenero').val(($(el).data('full').GENERO === true) ? 1: 0);
-                    
+                    $('#cmbGenero').val(($(el).data('full').GENERO === true) ? 1 : 0);
+
                     $('#tableRegion').hide();
                     $('#m_form_1').show();
                 });
@@ -42,12 +42,12 @@ var DatatablesDataSourceAjaxServer = {
                     var el = this;
 
                     swal({
-                        title: 'Você tem certeza?',
-                        text: "Você 'não será capaz de reverter isso!",
+                        title: 'VocÃª tem certeza?',
+                        text: "VocÃª 'nÃ£o serÃ¡ capaz de reverter isso!",
                         type: 'warning',
                         showCancelButton: true,
                         confirmButtonText: 'Sim, delete isso!',
-                        cancelButtonText: 'Não, cancele!',
+                        cancelButtonText: 'NÃ£o, cancele!',
                         reverseButtons: true
                     }).then(function (result) {
                         if (result.value) {
@@ -78,7 +78,7 @@ var DatatablesDataSourceAjaxServer = {
                         } else if (result.dismiss === 'cancel') {
                             swal(
                                 'Cancelado',
-                                'Seu registro não foi removido :)',
+                                'Seu registro nÃ£o foi removido :)',
                                 'error'
                             );
                         }
@@ -126,22 +126,22 @@ var DatatablesDataSourceAjaxServer = {
                 title: 'Cargo'
             }, {
                 data: "CPF",
-                    title: 'CPF',
-                    "render": function (data, type, row) {
-                        return (data) ? (data.substr(0, 3) + "." + data.substr(3, 3) + "." + data.substr(6, 3) + "-" + data.substr(9, 2)) : '';
-                    }
+                title: 'CPF',
+                "render": function (data, type, row) {
+                    return (data) ? (data.substr(0, 3) + "." + data.substr(3, 3) + "." + data.substr(6, 3) + "-" + data.substr(9, 2)) : '';
+                }
             }, {
                 data: "RG",
-                    title: 'RG',
-                    "render": function (data, type, row) {
-                        return (data) ? (data.substr(0, 2) + "." + data.substr(2, 3) + "." + data.substr(5, 3) + "-" + data.substr(8, 1)) : '';
-                    }
+                title: 'RG',
+                "render": function (data, type, row) {
+                    return (data) ? (data.substr(0, 2) + "." + data.substr(2, 3) + "." + data.substr(5, 3) + "-" + data.substr(8, 1)) : '';
+                }
             }, {
                 data: "GENERO",
-                    title: 'Gênero',
-                    "render": function (data, type, row) {
-                        return (data === true) ? 'Feminino' : ((data === false) ? 'Masculino' : '');
-                    }
+                title: 'GÃªnero',
+                "render": function (data, type, row) {
+                    return (data === true) ? 'Feminino' : ((data === false) ? 'Masculino' : '');
+                }
             }, {
                 data: "ID_FUNCIONARIO",
                 title: ''
@@ -226,27 +226,27 @@ var FormControls = function () {
 
                 $.each(result.data, function () {
                     var el = this;
-                    $('#cmbCargo').append('<option value="' + el.ID_CARGO + '">' + el.NM_CARGO +'</option>');
+                    $('#cmbCargo').append('<option value="' + el.ID_CARGO + '">' + el.NM_CARGO + '</option>');
                 });
-               
-                
+
+
             },
             error: function (xhr, status, error) {
                 console.log(xhr.statusText);
             }
         });
 
-        
+
     };
 
     var configuraMascaras = function () {
         $("#cpf").inputmask("mask", {
             "mask": "999.999.999-99"
-        }); 
+        });
 
         $("#rg").inputmask("mask", {
             "mask": "99.999.999-9"
-        }); 
+        });
     };
 
     return {
