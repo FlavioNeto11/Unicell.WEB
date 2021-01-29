@@ -60,9 +60,6 @@
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Unicell.DTO\Unicell.DTO.csproj">
       <Project>{9592059d-9e7a-454a-9588-c5c0bdc22cc6}</Project>
       <Name>Unicell.DTO</Name>
@@ -73,6 +70,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>DataResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
